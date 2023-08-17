@@ -1,0 +1,108 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    versionCatalogs {
+        libs {
+            version("kotlin", "1.9.0") // todo: mb fix
+            version("compose", "1.5.1")
+            version("bom_release_version", "2023.08.00")
+            version("splashScreen", "1.0.1")
+            version("coroutine", "1.7.3")
+            version("androidGradlePlugin", "8.1.0")
+
+            version("coreKtx", "1.10.1")
+            version("appCompat", "1.6.1")
+            version("activity_compose", "1.7.2")
+            version("serialization", "1.6.0-RC")
+            version("systemUIController", "0.31.6-rc")
+            version("hyperion", "0.9.34")
+            version("hyperion_nemiron", "0.3.3")
+            version("hilt", "2.47")
+            version("navigation", "2.7.0")
+            version("androidxHilt", "1.0.0")
+            version("detekt", "1.23.1")
+            version("chucker", "4.0.0")
+
+            plugin("android-application", "com.android.application").versionRef("androidGradlePlugin")
+            plugin("android-library", "com.android.library").versionRef("androidGradlePlugin")
+            plugin("kotlin-android", "org.jetbrains.kotlin.android").versionRef("kotlin")
+            plugin("kotlin-serailization", "org.jetbrains.kotlin.plugin.serialization").versionRef("kotlin")
+            plugin("kotlin-jvm", "org.jetbrains.kotlin.jvm").versionRef("kotlin")
+            plugin("dagger-hilt", "com.google.dagger.hilt.android").versionRef("hilt")
+            plugin("detekt-plugin", "io.gitlab.arturbosch.detekt").versionRef("detekt")
+            library("detekt-formatting", "io.gitlab.arturbosch.detekt", "detekt-formatting").versionRef("detekt")
+
+            library("coreKtx", "androidx.core", "core-ktx").versionRef("coreKtx")
+            library("appCompat", "androidx.appcompat", "appcompat").versionRef("appCompat")
+            library("activityCompose", "androidx.activity", "activity-compose").versionRef("activity_compose")
+
+            library("koltinxSerialization", "org.jetbrains.kotlinx", "kotlinx-serialization-core").versionRef("serialization")
+            library("koitlinxJsonSerial", "org.jetbrains.kotlinx", "kotlinx-serialization-json").versionRef("serialization")
+
+            library("splashScreen", "androidx.core", "core-splashscreen").versionRef("splashScreen")
+            library("systemUIController", "com.google.accompanist", "accompanist-systemuicontroller").versionRef("systemUIController")
+
+            library("navigationComponent", "androidx.navigation", "navigation-compose").versionRef("navigation")
+
+            library("androidMaterial", "com.google.android.material", "material").version("1.9.0")
+
+            library("kotlinxCoroutines", "org.jetbrains.kotlinx", "kotlinx-coroutines-core").versionRef("coroutine")
+            library("androidCoroutines", "org.jetbrains.kotlinx", "kotlinx-coroutines-android").versionRef("coroutine")
+
+            library("hyperion_core", "com.willowtreeapps.hyperion", "hyperion-core").versionRef("hyperion")
+            library("hyperion_crash", "com.willowtreeapps.hyperion", "hyperion-crash").versionRef("hyperion")
+            library("hyperion_disk", "com.willowtreeapps.hyperion", "hyperion-disk").versionRef("hyperion")
+            library("hyperion_preferences", "com.willowtreeapps.hyperion", "hyperion-shared-preferences").versionRef("hyperion")
+            library("hyperion_timber", "com.willowtreeapps.hyperion", "hyperion-timber").versionRef("hyperion")
+
+            library("hyperion_networkEmulation", "me.nemiron.hyperion", "network-emulation").versionRef("hyperion_nemiron")
+            library("hyperion_chucker", "me.nemiron.hyperion", "chucker").versionRef("hyperion_nemiron")
+
+            library("chucker", "com.github.chuckerteam.chucker", "library").versionRef("chucker")
+            library("chuckerNoOp", "com.github.chuckerteam.chucker", "library-no-op").versionRef("chucker")
+
+            library("hiltAndroid", "com.google.dagger", "hilt-android").versionRef("hilt")
+            library("hiltNavigationCompose", "androidx.hilt", "hilt-navigation-compose").versionRef("androidxHilt")
+            library("daggerHiltCompiler", "com.google.dagger", "hilt-compiler").versionRef("hilt")
+            library("androidxHiltCompiler", "androidx.hilt", "hilt-compiler").versionRef("androidxHilt")
+
+            // Debugging
+            library('timber', 'com.jakewharton.timber', 'timber').version('5.0.1')
+
+            // USE platform
+            library("compose_bom", "androidx.compose", "compose-bom").versionRef("bom_release_version")
+            library("ui-tooling", "androidx.compose.ui", "ui-tooling").withoutVersion()
+            library("material", "androidx.compose.material", "material").withoutVersion()
+            library("compose_foundation", "androidx.compose.foundation", "foundation").withoutVersion()
+            library("compose_ui", "androidx.compose.ui", "ui").withoutVersion()
+            library("ui-tooling-preview", "androidx.compose.ui", "ui-tooling-preview").withoutVersion()
+
+            bundle("androidx", ["coreKtx", "appCompat", "activityCompose"])
+            bundle("navigation", ["hiltNavigationCompose", "navigationComponent"])
+            bundle("compose", ["material", "compose_foundation", "compose_ui", "ui-tooling-preview"])
+            bundle("serialization", ["koltinxSerialization", "koitlinxJsonSerial"])
+            bundle("coroutine", ["kotlinxCoroutines", "androidCoroutines"])
+            bundle("hyperion", ["hyperion_core", "hyperion_crash", "hyperion_disk", "hyperion_preferences", "hyperion_timber"])
+            bundle("hyperionExt", ["hyperion_networkEmulation", "hyperion_chucker"])
+            bundle("composeDebug", ["ui-tooling"])
+        }
+    }
+}
+rootProject.name = "True Emotions"
+include ':app'
+include ':lib'
+include ':lib:ui'
+include ':lib:domain'
+include ':lib:data'

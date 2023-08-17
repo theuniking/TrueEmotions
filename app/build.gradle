@@ -1,0 +1,111 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-android'
+    id 'kotlin-parcelize'
+    id 'com.google.dagger.hilt.android'
+    id 'kotlin-kapt'
+}
+
+android {
+    namespace 'com.verome.emotions'
+    compileSdk target_sdk_version
+
+    defaultConfig {
+        applicationId "com.verome.emotions"
+        minSdk min_sdk_version
+        targetSdk target_sdk_version
+        versionCode 1
+        versionName "0.1.0"
+    }
+
+//    signingConfigs {
+//        debug {
+//            // SHA1: 45:0E:A6:69:36:DB:9F:7D:7F:B1:E1:D7:3C:96:77:D9:44:A7:20:71
+//            // SHA256: A8:99:53:98:0F:22:A7:6A:A4:94:9A:23:0C:94:A6:BB:43:F6:18:FA:4F:59:49:11:36:0A:C1:DA:8B:19:1E:95
+//            storeFile file('../keystore/debug/debug.keystore')
+//            storePassword 'True2023emotions'
+//            keyAlias 'True2023aliasemotions'
+//            keyPassword 'True2023emotions'
+//        }
+//
+//        release {
+//            // SHA1: 15:69:CC:75:BC:E9:D4:BF:6E:EC:BB:36:8E:78:DF:D8:15:A4:2C:70
+//            // SHA256: 7C:6E:6B:D2:59:E2:23:B6:F5:9C:D7:40:99:B0:E7:EE:99:F5:2C:33:17:F7:6C:4E:68:CB:68:C0:96:DB:59:EA
+//            storeFile file('../keystore/release/release.keystore')
+//            storePassword 'True2023emotionskeystore'
+//            keyAlias 'True2023emotionsalias'
+//            keyPassword 'True2023emotionskey'
+//        }
+//    }
+
+    buildTypes {
+        debug {
+            applicationIdSuffix ".debug"
+            versionNameSuffix "-debug"
+            debuggable true
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        compose true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion libs.versions.compose.get()
+    }
+
+    sourceSets {
+        main.kotlin.srcDirs += "src/main/kotlin"
+        debug.kotlin.srcDirs += "src/debug/kotlin"
+        androidTest.kotlin.srcDirs += "src/androidTest/kotlin"
+        test.kotlin.srcDirs += "src/test/kotlin"
+    }
+
+    packagingOptions {
+        resources.excludes.add("META-INF/**/*")
+    }
+}
+
+dependencies {
+    implementation project(':lib:ui')
+    implementation project(':lib:domain')
+
+    implementation libs.bundles.androidx
+
+    def composeBom = platform(libs.compose.bom)
+    implementation composeBom
+    androidTestImplementation composeBom
+    implementation libs.splashScreen
+
+    implementation libs.bundles.compose
+    implementation libs.bundles.navigation
+    kapt libs.androidxHiltCompiler
+
+    implementation libs.bundles.serialization
+    implementation libs.hiltAndroid
+    kapt libs.daggerHiltCompiler
+
+    implementation libs.timber
+
+    debugImplementation libs.bundles.composeDebug
+    debugImplementation libs.bundles.hyperion
+    debugImplementation libs.bundles.hyperionExt
+}
+
+kapt {
+    correctErrorTypes true
+}
