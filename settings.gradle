@@ -24,6 +24,7 @@ dependencyResolutionManagement {
 
             version("coreKtx", "1.10.1")
             version("appCompat", "1.6.1")
+            version("accompanistNavigation", "0.31.6-rc")
             version("activity_compose", "1.7.2")
             version("serialization", "1.6.0-RC")
             version("systemUIController", "0.31.6-rc")
@@ -55,6 +56,7 @@ dependencyResolutionManagement {
             library("systemUIController", "com.google.accompanist", "accompanist-systemuicontroller").versionRef("systemUIController")
 
             library("navigationComponent", "androidx.navigation", "navigation-compose").versionRef("navigation")
+            library("accompanistNavigation", "com.google.accompanist", "accompanist-navigation-material").versionRef("accompanistNavigation")
 
             library("androidMaterial", "com.google.android.material", "material").version("1.9.0")
 
@@ -90,7 +92,7 @@ dependencyResolutionManagement {
             library("ui-tooling-preview", "androidx.compose.ui", "ui-tooling-preview").withoutVersion()
 
             bundle("androidx", ["coreKtx", "appCompat", "activityCompose"])
-            bundle("navigation", ["hiltNavigationCompose", "navigationComponent"])
+            bundle("navigation", ["hiltNavigationCompose", "navigationComponent", "accompanistNavigation"])
             bundle("compose", ["material", "compose_foundation", "compose_ui", "ui-tooling-preview"])
             bundle("serialization", ["koltinxSerialization", "koitlinxJsonSerial"])
             bundle("coroutine", ["kotlinxCoroutines", "androidCoroutines"])
