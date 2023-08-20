@@ -6,18 +6,47 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 
 val CoreWhite = Color(0xFFFFFFFF)
-val CoreBlack = Color(0xFF000000)
+val CoreBlack = Color(0xFF2E2E2E)
+val White = Color(0xFFF6F9FF)
+val Grey30 = Color(0xFF7D7D7D)
+val Grey50 = Color(0xFF8A8A8A)
+val Grey70 = Color(0xFFBFBFBF)
+val Indigo30 = Color(0xFF5445F9)
+val Indigo50 = Color(0xFF7157FC)
+val Indigo70 = Color(0xFF8F68FF)
+val Blue80 = Color(0xFF83AFFF)
+val Red70 = Color(0xFFD97C7C)
 
 data class AdditionalColors(
     val coreWhite: Color,
     val coreBlack: Color,
-    val backgroundPrimary: Color,
+    val coreGradientFirst: Color,
+    val coreGradientSecond: Color,
+    val background: Color,
+    val stroke: Color,
+    val error: Color,
+    val textTrick: Color,
+    val textMain: Color,
+    val textLight: Color,
+    val btnText: Color,
+    val btnDisabledGradientFirst: Color,
+    val btnDisabledGradientSecond: Color,
 )
 
 val additionalLightColors = AdditionalColors(
     coreWhite = CoreWhite,
     coreBlack = CoreBlack,
-    backgroundPrimary = CoreWhite,
+    coreGradientFirst = Indigo30,
+    coreGradientSecond = Indigo70,
+    background = White,
+    stroke = Blue80,
+    error = Red70,
+    textTrick = Grey50,
+    textMain = CoreBlack,
+    textLight = CoreWhite,
+    btnText = Indigo50,
+    btnDisabledGradientFirst = Grey30,
+    btnDisabledGradientSecond = Grey70,
 )
 
 val LocalAdditionalColorsProvider = staticCompositionLocalOf<AdditionalColors> {
