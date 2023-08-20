@@ -36,8 +36,6 @@ internal fun MainContent(uiState: MainUiState, viewModel: MainViewModel) {
                 when (value) {
                     is OpenScreenEvent -> navController.navigate(value.screen.route)
 
-//                    is OpenSomeScreensEvent -> navigator.push(value.screens)
-
                     is NavigateBackEvent -> navController.popBackStack()
 
                     is OpenBottomSheetEvent -> {
@@ -52,21 +50,11 @@ internal fun MainContent(uiState: MainUiState, viewModel: MainViewModel) {
                         }
                     }
 
-//                    is OpenNewRootScreenEvent -> {
-//                        navigator.popUntilRoot()
-//                        navigator.replace(value.screen)
-//                    }
-//
-//                    is NavigateBackUntilScreenEvent -> {
-//                        if (navigator.items.contains(value.screen)) {
-//                            navigator.popUntil { it == value.screen }
-//                        }
-//                    }
-
                     else -> Unit
                 }
             }
     }
+
     ModalBottomSheetLayout(
         bottomSheetNavigator = bottomSheetNavigator,
     ) {
