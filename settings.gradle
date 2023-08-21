@@ -27,6 +27,7 @@ dependencyResolutionManagement {
             version("accompanistNavigation", "0.31.6-rc")
             version("activity_compose", "1.7.2")
             version("serialization", "1.6.0-RC")
+            version("coil", "2.4.0")
             version("systemUIController", "0.31.6-rc")
             version("hyperion", "0.9.34")
             version("hyperion_nemiron", "0.3.3")
@@ -60,6 +61,9 @@ dependencyResolutionManagement {
 
             library("androidMaterial", "com.google.android.material", "material").version("1.9.0")
 
+            library("coil", "io.coil-kt", "coil").versionRef("coil")
+            library("coilCompose", "io.coil-kt", "coil-compose").versionRef("coil")
+
             library("kotlinxCoroutines", "org.jetbrains.kotlinx", "kotlinx-coroutines-core").versionRef("coroutine")
             library("androidCoroutines", "org.jetbrains.kotlinx", "kotlinx-coroutines-android").versionRef("coroutine")
 
@@ -92,6 +96,7 @@ dependencyResolutionManagement {
             library("ui-tooling-preview", "androidx.compose.ui", "ui-tooling-preview").withoutVersion()
 
             bundle("androidx", ["coreKtx", "appCompat", "activityCompose"])
+            bundle("coil", ["coil", "coilCompose"])
             bundle("navigation", ["hiltNavigationCompose", "navigationComponent", "accompanistNavigation"])
             bundle("compose", ["material", "compose_foundation", "compose_ui", "ui-tooling-preview"])
             bundle("serialization", ["koltinxSerialization", "koitlinxJsonSerial"])

@@ -13,3 +13,6 @@ val shapes = Shapes(
 
 val Shapes.BottomSheetShape
     @Composable get() = RoundedCornerShape(16.dp, 16.dp)
+
+val Shapes.ButtonShape
+    @Composable get() = RoundedCornerShape(50)

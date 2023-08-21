@@ -54,5 +54,7 @@ dependencies {
     implementation libs.hiltAndroid
     kapt libs.daggerHiltCompiler
 
+    implementation libs.bundles.coil
+
     implementation libs.androidMaterial
 }
