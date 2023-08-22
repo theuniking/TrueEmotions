@@ -3,6 +3,7 @@ package com.verome.emotions.presentation.main
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.navigation.compose.NavHost
@@ -19,6 +20,7 @@ import com.verome.core.ui.navigation.OpenBottomSheetEvent
 import com.verome.core.ui.navigation.OpenScreenEvent
 import com.verome.core.ui.navigation.Screen
 import com.verome.core.ui.widgets.dialog.alert.ShowAlertDialog
+import com.verome.emotions.auth.presentation.login.LoginScreen
 
 @OptIn(ExperimentalMaterialNavigationApi::class)
 @Composable
@@ -60,14 +62,14 @@ internal fun MainContent(uiState: MainUiState, viewModel: MainViewModel) {
     ) {
         NavHost(
             navController = navController,
-            startDestination = Screen.Home.route,
+            startDestination = Screen.Auth.route,
         ) {
             navigation(
                 route = Screen.Auth.route,
                 startDestination = Screen.Auth.LogIn.route,
             ) {
                 composable(Screen.Auth.LogIn.route) {
-
+                    LoginScreen(viewModel = hiltViewModel())
                 }
                 composable(Screen.Auth.SignUp.route) {
 
