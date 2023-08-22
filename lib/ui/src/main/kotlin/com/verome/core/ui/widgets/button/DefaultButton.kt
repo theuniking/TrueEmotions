@@ -10,6 +10,7 @@ import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -20,6 +21,8 @@ import androidx.compose.ui.unit.dp
 import com.verome.core.ui.theme.AppTheme
 import com.verome.core.ui.theme.ButtonShape
 import com.verome.core.ui.theme.additionalColors
+import com.verome.core.ui.theme.bold
+import com.verome.core.ui.widgets.button.extension.zeroElevation
 
 @Composable
 fun DefaultButton(
@@ -27,7 +30,7 @@ fun DefaultButton(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     onClick: () -> Unit,
-    style: TextStyle = MaterialTheme.typography.button,
+    style: TextStyle = MaterialTheme.typography.button.bold(),
     colors: Brush? = null,
     shape: CornerBasedShape = MaterialTheme.shapes.ButtonShape,
     contentPadding: PaddingValues = PaddingValues(horizontal = 74.dp, vertical = 17.dp),
@@ -41,10 +44,11 @@ fun DefaultButton(
     },
 ) {
     Button(
-        modifier = modifier,
+        modifier = Modifier.padding(horizontal = 50.dp),
+        contentPadding = PaddingValues(0.dp),
         enabled = enabled,
         onClick = onClick,
-        elevation = ButtonDefaults.elevation(),
+        elevation = ButtonDefaults.zeroElevation(),
         colors = ButtonDefaults.buttonColors(
             backgroundColor = Color.Transparent,
             disabledBackgroundColor = Color.Transparent,
@@ -52,7 +56,7 @@ fun DefaultButton(
         shape = shape,
     ) {
         Box(
-            modifier = Modifier
+            modifier = modifier
                 .background(
                     brush = when {
                         colors != null -> colors
@@ -76,6 +80,7 @@ fun DefaultButton(
                     },
                     shape = MaterialTheme.shapes.ButtonShape,
                 ),
+            contentAlignment = Alignment.Center,
         ) {
             content()
         }

@@ -1,7 +1,11 @@
 package com.verome.core.ui.input
 
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.text.KeyboardActions
@@ -18,6 +22,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
@@ -36,6 +42,7 @@ import com.verome.core.ui.theme.additionalColors
 fun CommonInputField(
     modifier: Modifier = Modifier,
     text: String,
+    errorText: String? = null,
     onValueChange: (String) -> Unit,
     trailingIconRes: Any? = null,
     trailingIconColor: Color = MaterialTheme.additionalColors.icon,
@@ -45,7 +52,7 @@ fun CommonInputField(
     maxLines: Int = 1,
     colors: TextFieldColors = TextFieldDefaults.textFieldColors(
         textColor = MaterialTheme.additionalColors.textMain,
-        backgroundColor = MaterialTheme.additionalColors.background,
+        backgroundColor = MaterialTheme.additionalColors.coreWhite,
         disabledIndicatorColor = Color.Unspecified,
         errorIndicatorColor = Color.Unspecified,
         focusedIndicatorColor = Color.Unspecified,
@@ -65,37 +72,57 @@ fun CommonInputField(
         onClick = { onClickTrailingIcon?.invoke() },
     )
 
-    TextField(
-        modifier = modifier
-            .fillMaxWidth()
-            .border(
-                width = 1.dp,
-                color = when {
-                    isFocused -> MaterialTheme.additionalColors.stroke
-                    else -> Color.Transparent
-                },
-            )
-            .onFocusChanged {
-                isFocused = it.hasFocus
-            },
-        value = text,
-        onValueChange = onValueChange,
-        trailingIcon = trailingIcon,
-        placeholder = placeholderText?.let {
-            {
-                CommonInputDefaultPlaceholder(
-                    text = placeholderText,
-                    color = MaterialTheme.additionalColors.textTrick,
+    Column {
+        TextField(
+            modifier = modifier
+                .fillMaxWidth()
+                .border(
+                    width = 1.dp,
+                    color = when {
+                        isFocused -> MaterialTheme.additionalColors.stroke
+                        else -> Color.Transparent
+                    },
+                    shape = shape,
                 )
-            }
-        },
-        shape = shape,
-        maxLines = maxLines,
-        colors = colors,
-        keyboardOptions = KeyboardOptions(keyboardType = keyboardType, imeAction = imeAction),
-        visualTransformation = if (isFocused || text.isNotEmpty()) visualTransformation else VisualTransformation.None,
-        keyboardActions = keyboardActions,
-    )
+                .onFocusChanged {
+                    isFocused = it.hasFocus
+                }
+                .height(IntrinsicSize.Min)
+                .shadow(
+                    elevation = 5.dp,
+                    shape = shape,
+                    spotColor = MaterialTheme.additionalColors.btnDisabledGradientFirst,
+                    ambientColor = MaterialTheme.additionalColors.btnDisabledGradientSecond,
+                )
+                .clip(shape),
+            value = text,
+            onValueChange = onValueChange,
+            trailingIcon = trailingIcon,
+            placeholder = placeholderText?.let {
+                {
+                    CommonInputDefaultPlaceholder(
+                        text = placeholderText,
+                        color = MaterialTheme.additionalColors.textTrick,
+                    )
+                }
+            },
+            shape = shape,
+            maxLines = maxLines,
+            colors = colors,
+            keyboardOptions = KeyboardOptions(keyboardType = keyboardType, imeAction = imeAction),
+            visualTransformation = if (isFocused || text.isNotEmpty()) visualTransformation else VisualTransformation.None,
+            keyboardActions = keyboardActions,
+        )
+        if (errorText != null) {
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 8.dp),
+                text = errorText,
+                color = MaterialTheme.additionalColors.error,
+            )
+        }
+    }
 }
 
 @Composable

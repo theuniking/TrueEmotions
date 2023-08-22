@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
                     modifier = Modifier
                         .padding(WindowInsets.navigationBars.asPaddingValues())
                         .fillMaxSize(),
-                    color = MaterialTheme.additionalColors.backgroundPrimary,
+                    color = MaterialTheme.additionalColors.background,
                 ) {
                     val uiState by viewModel.uiState.collectAsState()
                     splashScreen.setKeepOnScreenCondition {
