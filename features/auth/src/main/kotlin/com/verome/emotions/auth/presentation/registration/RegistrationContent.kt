@@ -1,4 +1,4 @@
-package com.verome.emotions.auth.presentation.login
+package com.verome.emotions.auth.presentation.registration
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -29,9 +29,9 @@ import com.verome.core.ui.theme.bold
 import com.verome.core.ui.widgets.button.DefaultButton
 
 @Composable
-internal fun LoginContent(
-    uiState: LoginUiState,
-    controller: LoginController,
+internal fun RegistrationContent(
+    uiState: RegistrationUiState,
+    controller: RegistrationController,
 ) {
     Column {
         Box {
@@ -48,12 +48,12 @@ internal fun LoginContent(
                     .padding(bottom = 74.dp, start = 16.dp),
             ) {
                 Text(
-                    text = "Welcome back,",
+                    text = "Hello, create",
                     style = MaterialTheme.typography.h2,
                     color = MaterialTheme.additionalColors.coreWhite,
                 )
                 Text(
-                    text = "Log in",
+                    text = "New account",
                     style = MaterialTheme.typography.h1.bold(),
                     color = MaterialTheme.additionalColors.coreWhite,
                 )
@@ -74,6 +74,13 @@ internal fun LoginContent(
             )
             Spacer(modifier = Modifier.height(8.dp))
             CommonInputField(
+                text = uiState.name,
+                onValueChange = controller::onNameFieldChange,
+                placeholderText = "Your Name",
+                errorText = String.empty,
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            CommonInputField(
                 text = uiState.password,
                 onValueChange = controller::onPasswordFieldChange,
                 placeholderText = "Your Password",
@@ -81,21 +88,21 @@ internal fun LoginContent(
             )
             Spacer(modifier = Modifier.weight(1f))
             DefaultButton(
-                text = "Log in",
-                onClick = controller::onLoginButtonClick,
+                text = "Sign Up",
+                onClick = controller::onRegisterButtonClick,
                 modifier = Modifier.fillMaxWidth(),
-                enabled = uiState.isLoginEnabled,
+                enabled = uiState.isRegistrationEnabled,
             )
             Spacer(modifier = Modifier.height(12.dp))
             Row {
                 Text(
-                    text = "Not a member yet?",
+                    text = "Already a member?",
                     style = MaterialTheme.typography.body1,
                 )
                 Spacer(modifier = Modifier.width(3.dp))
                 Text(
-                    text = "Sign Up",
-                    modifier = Modifier.clickable { controller.onRegisterButtonClick() },
+                    text = "Log In",
+                    modifier = Modifier.clickable { controller.onLoginButtonClick() },
                     style = MaterialTheme.typography.body1.bold(),
                     color = MaterialTheme.additionalColors.btnText,
                 )
@@ -107,22 +114,29 @@ internal fun LoginContent(
 
 @Preview(showSystemUi = true)
 @Composable
-private fun LoginContentPreview() {
+private fun RegistrationContentPreview() {
     AppTheme {
-        class FakeLoginController : LoginController {
+        class FakeRegistrationController : RegistrationController {
             override fun onEmailFieldChange(email: String) = Unit
+
+            override fun onNameFieldChange(name: String) = Unit
+
             override fun onPasswordFieldChange(password: String) = Unit
+
             override fun changePasswordVisibility() = Unit
-            override fun onLoginButtonClick() = Unit
+
             override fun onRegisterButtonClick() = Unit
+
+            override fun onLoginButtonClick() = Unit
         }
 
-        LoginContent(
-            uiState = LoginUiState(
+        RegistrationContent(
+            uiState = RegistrationUiState(
                 email = "universe@king.com",
+                name = "Universe",
                 password = "password",
             ),
-            controller = FakeLoginController(),
+            controller = FakeRegistrationController(),
         )
     }
 }

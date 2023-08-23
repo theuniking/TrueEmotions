@@ -21,6 +21,7 @@ import com.verome.core.ui.navigation.OpenScreenEvent
 import com.verome.core.ui.navigation.Screen
 import com.verome.core.ui.widgets.dialog.alert.ShowAlertDialog
 import com.verome.emotions.auth.presentation.login.LoginScreen
+import com.verome.emotions.auth.presentation.registration.RegistrationScreen
 
 @OptIn(ExperimentalMaterialNavigationApi::class)
 @Composable
@@ -36,7 +37,9 @@ internal fun MainContent(uiState: MainUiState, viewModel: MainViewModel) {
             .flowWithLifecycle(lifecycleOwner.lifecycle, Lifecycle.State.STARTED)
             .collect { value ->
                 when (value) {
-                    is OpenScreenEvent -> navController.navigate(value.screen.route)
+                    is OpenScreenEvent -> {
+                        navController.navigate(value.screen.route)
+                    }
 
                     is NavigateBackEvent -> navController.popBackStack()
 
@@ -72,7 +75,7 @@ internal fun MainContent(uiState: MainUiState, viewModel: MainViewModel) {
                     LoginScreen(viewModel = hiltViewModel())
                 }
                 composable(Screen.Auth.SignUp.route) {
-
+                    RegistrationScreen(viewModel = hiltViewModel())
                 }
             }
             composable(
