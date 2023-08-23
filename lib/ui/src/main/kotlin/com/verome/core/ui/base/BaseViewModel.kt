@@ -13,9 +13,11 @@ import javax.inject.Inject
 
 abstract class BaseViewModel : ViewModel() {
 
-    @Inject lateinit var errorHandler: ErrorHandler
+    @Inject
+    lateinit var errorHandler: ErrorHandler
 
-    @Inject lateinit var eventBus: EventBus
+    @Inject
+    lateinit var eventBus: EventBus
 
     fun sendEvent(event: SystemEvent) {
         eventBus.sendEvent(event)

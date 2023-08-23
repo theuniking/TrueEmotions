@@ -12,6 +12,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
@@ -44,7 +45,13 @@ fun DefaultButton(
     },
 ) {
     Button(
-        modifier = Modifier.padding(horizontal = 50.dp),
+        modifier = Modifier.padding(horizontal = 50.dp)
+            .shadow(
+                elevation = 10.dp,
+                shape = shape,
+                spotColor = MaterialTheme.additionalColors.btnDisabledGradientFirst,
+                ambientColor = MaterialTheme.additionalColors.btnDisabledGradientSecond,
+            ),
         contentPadding = PaddingValues(0.dp),
         enabled = enabled,
         onClick = onClick,

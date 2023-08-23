@@ -1,4 +1,4 @@
-package com.verome.emotions.auth.presentation.login
+package com.verome.emotions.auth.presentation.registration
 
 import com.verome.core.domain.empty
 import com.verome.core.ui.base.BaseViewModel
@@ -12,15 +12,21 @@ import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor() : BaseViewModel(), LoginController {
+class RegistrationViewModel @Inject constructor() : BaseViewModel(), RegistrationController {
     private val _uiState = MutableStateFlow(
-        LoginUiState(email = String.empty, password = String.empty),
+        RegistrationUiState(email = String.empty, name = String.empty, password = String.empty),
     )
-    internal val uiState: StateFlow<LoginUiState> = _uiState.asStateFlow()
+    internal val uiState: StateFlow<RegistrationUiState> = _uiState.asStateFlow()
 
     override fun onEmailFieldChange(email: String) {
         _uiState.tryToUpdate {
             it.copy(email = email, emailError = null)
+        }
+    }
+
+    override fun onNameFieldChange(name: String) {
+        _uiState.tryToUpdate {
+            it.copy(name = name, nameError = null)
         }
     }
 
@@ -36,14 +42,14 @@ class LoginViewModel @Inject constructor() : BaseViewModel(), LoginController {
         }
     }
 
-    override fun onLoginButtonClick() {
+    override fun onRegisterButtonClick() {
         // TODO: Implement next screen navigation
     }
 
-    override fun onRegisterButtonClick() {
+    override fun onLoginButtonClick() {
         sendEvent(
             OpenScreenEvent(
-                Screen.Auth.SignUp,
+                Screen.Auth.LogIn,
             ),
         )
     }
