@@ -15,9 +15,7 @@
     <style name="SplashTheme" parent="AppTheme">
         <item name="android:windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
-        <item name="android:windowBackground">@drawable/bg_splash_screen</item>
-<!--        <item name="android:statusBarColor">@color/steel_gray_50</item>-->
-<!--        <item name="android:navigationBarColor">@color/steel_gray_50</item>-->
+        <item name="android:windowBackground">@drawable/ic_launcher_foreground</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:windowLightNavigationBar">true</item>
 
