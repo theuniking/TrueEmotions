@@ -1,5 +1,6 @@
 package com.verome.emotions.presentation.main
 
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.platform.LocalLifecycleOwner
@@ -22,6 +23,7 @@ import com.verome.core.ui.navigation.Screen
 import com.verome.core.ui.widgets.dialog.alert.ShowAlertDialog
 import com.verome.emotions.auth.presentation.login.LoginScreen
 import com.verome.emotions.auth.presentation.registration.RegistrationScreen
+import com.verome.emotions.home.presentation.home.HomeScreen
 
 @OptIn(ExperimentalMaterialNavigationApi::class)
 @Composable
@@ -78,10 +80,20 @@ internal fun MainContent(uiState: MainUiState, viewModel: MainViewModel) {
                     RegistrationScreen(viewModel = hiltViewModel())
                 }
             }
-            composable(
-                route = Screen.Home.route,
+            navigation(
+                route = Screen.Main.route,
+                startDestination = Screen.Main.Home.route,
             ) {
-
+                composable(
+                    route = Screen.Main.Home.route,
+                ) {
+                    HomeScreen(viewModel = hiltViewModel())
+                }
+                composable(
+                    route = Screen.Main.Reflection.route,
+                ) {
+                    Text("Reflection") // todo: make ReflectionScreen
+                }
             }
             bottomSheet(
                 route = Screen.BottomSheetScreen.Profile.route,

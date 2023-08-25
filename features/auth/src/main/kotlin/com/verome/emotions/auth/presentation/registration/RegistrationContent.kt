@@ -22,7 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.verome.auth.R
 import com.verome.core.domain.empty
-import com.verome.core.ui.input.CommonInputField
+import com.verome.core.ui.widgets.input.CommonInputField
 import com.verome.core.ui.theme.AppTheme
 import com.verome.core.ui.theme.additionalColors
 import com.verome.core.ui.theme.bold
@@ -97,13 +97,13 @@ internal fun RegistrationContent(
             Row {
                 Text(
                     text = "Already a member?",
-                    style = MaterialTheme.typography.body1,
+                    style = MaterialTheme.typography.subtitle1,
                 )
                 Spacer(modifier = Modifier.width(3.dp))
                 Text(
                     text = "Log In",
                     modifier = Modifier.clickable { controller.onLoginButtonClick() },
-                    style = MaterialTheme.typography.body1.bold(),
+                    style = MaterialTheme.typography.subtitle1.bold(),
                     color = MaterialTheme.additionalColors.btnText,
                 )
             }

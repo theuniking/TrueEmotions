@@ -84,6 +84,7 @@ dependencies {
     implementation project(':lib:ui')
     implementation project(':lib:domain')
     implementation project(':features:auth')
+    implementation project(':features:home')
 
     implementation libs.bundles.androidx
 

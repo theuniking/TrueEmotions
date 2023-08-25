@@ -30,12 +30,22 @@ val TrueEmotionsTypography = Typography(
     body1 = TextStyle(
         color = CoreBlack,
         fontWeight = FontWeight.Normal,
-        fontSize = 16.sp,
+        fontSize = 12.sp,
     ),
     body2 = TextStyle(
         color = CoreBlack,
         fontWeight = FontWeight.Normal,
-        fontSize = 12.sp,
+        fontSize = 10.sp,
+    ),
+    subtitle1 = TextStyle(
+        color = CoreBlack,
+        fontWeight = FontWeight.Normal,
+        fontSize = 16.sp,
+    ),
+    subtitle2 = TextStyle(
+        color = CoreBlack,
+        fontWeight = FontWeight.Normal,
+        fontSize = 14.sp,
     ),
     button = TextStyle(
         color = CoreBlack,
