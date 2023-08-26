@@ -43,7 +43,12 @@ class RegistrationViewModel @Inject constructor() : BaseViewModel(), Registratio
     }
 
     override fun onRegisterButtonClick() {
-        // TODO: Implement next screen navigation
+        // todo: implement data check and save
+        sendEvent(
+            OpenScreenEvent(
+                Screen.Main.Home,
+            ),
+        )
     }
 
     override fun onLoginButtonClick() {

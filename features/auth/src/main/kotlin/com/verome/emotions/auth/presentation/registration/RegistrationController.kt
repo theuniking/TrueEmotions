@@ -1,6 +1,9 @@
 package com.verome.emotions.auth.presentation.registration
 
-interface RegistrationController {
+import androidx.compose.runtime.Stable
+
+@Stable
+internal interface RegistrationController {
     fun onEmailFieldChange(email: String)
     fun onNameFieldChange(name: String)
     fun onPasswordFieldChange(password: String)

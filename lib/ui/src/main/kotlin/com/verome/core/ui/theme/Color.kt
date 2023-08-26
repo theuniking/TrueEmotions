@@ -12,9 +12,11 @@ val Grey30 = Color(0xFF7D7D7D)
 val Grey40 = Color(0xFF848484)
 val Grey50 = Color(0xFF8A8A8A)
 val Grey70 = Color(0xFFBFBFBF)
+val Grey90 = Color(0xFFECF1FD)
 val Indigo30 = Color(0xFF5445F9)
 val Indigo50 = Color(0xFF7157FC)
 val Indigo70 = Color(0xFF8F68FF)
+val Indigo90 = Color(0xFFAFB7FF)
 val Blue80 = Color(0xFF83AFFF)
 val Red70 = Color(0xFFD97C7C)
 
@@ -24,7 +26,8 @@ data class AdditionalColors(
     val coreGradientFirst: Color,
     val coreGradientSecond: Color,
     val background: Color,
-    val stroke: Color,
+    val textFieldBorder: Color,
+    val tagBorder: Color,
     val error: Color,
     val textTrick: Color,
     val textMain: Color,
@@ -33,6 +36,7 @@ data class AdditionalColors(
     val btnText: Color,
     val btnDisabledGradientFirst: Color,
     val btnDisabledGradientSecond: Color,
+    val actionCard1: Color,
 )
 
 val additionalLightColors = AdditionalColors(
@@ -41,7 +45,8 @@ val additionalLightColors = AdditionalColors(
     coreGradientFirst = Indigo70,
     coreGradientSecond = Indigo30,
     background = White,
-    stroke = Blue80,
+    textFieldBorder = Blue80,
+    tagBorder = Grey90,
     error = Red70,
     textTrick = Grey50,
     textMain = CoreBlack,
@@ -50,6 +55,7 @@ val additionalLightColors = AdditionalColors(
     btnText = Indigo50,
     btnDisabledGradientFirst = Grey70,
     btnDisabledGradientSecond = Grey30,
+    actionCard1 = Indigo90,
 )
 
 val LocalAdditionalColorsProvider = staticCompositionLocalOf<AdditionalColors> {

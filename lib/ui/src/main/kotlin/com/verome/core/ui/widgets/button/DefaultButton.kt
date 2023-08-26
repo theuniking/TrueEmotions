@@ -12,13 +12,13 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.verome.core.ui.extension.defaultShadow
 import com.verome.core.ui.theme.AppTheme
 import com.verome.core.ui.theme.ButtonShape
 import com.verome.core.ui.theme.additionalColors
@@ -46,12 +46,7 @@ fun DefaultButton(
 ) {
     Button(
         modifier = Modifier.padding(horizontal = 50.dp)
-            .shadow(
-                elevation = 10.dp,
-                shape = shape,
-                spotColor = MaterialTheme.additionalColors.btnDisabledGradientFirst,
-                ambientColor = MaterialTheme.additionalColors.btnDisabledGradientSecond,
-            ),
+            .defaultShadow(shape = shape),
         contentPadding = PaddingValues(0.dp),
         enabled = enabled,
         onClick = onClick,

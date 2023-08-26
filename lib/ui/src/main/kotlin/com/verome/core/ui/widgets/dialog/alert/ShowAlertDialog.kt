@@ -54,7 +54,7 @@ private fun AlertDialogContent(
                     modifier = Modifier.fillMaxWidth(),
                     text = text.resolve(),
                     color = MaterialTheme.additionalColors.coreBlack,
-                    style = MaterialTheme.typography.body1.copy(fontWeight = FontWeight.Bold),
+                    style = MaterialTheme.typography.subtitle1.copy(fontWeight = FontWeight.Bold),
                 )
             }
         },
@@ -63,7 +63,7 @@ private fun AlertDialogContent(
                 modifier = Modifier.fillMaxWidth(),
                 text = data.description.resolve(),
                 color = MaterialTheme.additionalColors.coreBlack,
-                style = MaterialTheme.typography.body2,
+                style = MaterialTheme.typography.subtitle1,
             )
         },
         confirmButton = {

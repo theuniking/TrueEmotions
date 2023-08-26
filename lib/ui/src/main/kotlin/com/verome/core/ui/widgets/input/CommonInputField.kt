@@ -1,4 +1,4 @@
-package com.verome.core.ui.input
+package com.verome.core.ui.widgets.input
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
@@ -23,7 +23,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
@@ -35,6 +34,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.verome.core.ui.extension.defaultShadow
 import com.verome.core.ui.theme.AppTheme
 import com.verome.core.ui.theme.additionalColors
 
@@ -79,7 +79,7 @@ fun CommonInputField(
                 .border(
                     width = 1.dp,
                     color = when {
-                        isFocused -> MaterialTheme.additionalColors.stroke
+                        isFocused -> MaterialTheme.additionalColors.textFieldBorder
                         else -> Color.Transparent
                     },
                     shape = shape,
@@ -88,12 +88,7 @@ fun CommonInputField(
                     isFocused = it.hasFocus
                 }
                 .height(IntrinsicSize.Min)
-                .shadow(
-                    elevation = 5.dp,
-                    shape = shape,
-                    spotColor = MaterialTheme.additionalColors.btnDisabledGradientFirst,
-                    ambientColor = MaterialTheme.additionalColors.btnDisabledGradientSecond,
-                )
+                .defaultShadow(shape = shape)
                 .clip(shape),
             value = text,
             onValueChange = onValueChange,
@@ -165,7 +160,7 @@ private fun CommonInputIcon(
 fun CommonInputDefaultPlaceholder(
     modifier: Modifier = Modifier,
     text: String,
-    style: TextStyle = MaterialTheme.typography.body1,
+    style: TextStyle = MaterialTheme.typography.subtitle1,
     color: Color = MaterialTheme.additionalColors.coreBlack,
 ) {
     Text(
