@@ -32,6 +32,8 @@ dependencyResolutionManagement {
             version("hyperion", "0.9.34")
             version("hyperion_nemiron", "0.3.3")
             version("hilt", "2.47")
+            version("room", "2.5.2")
+            version("ksp", "1.9.0-1.0.13")
             version("navigation", "2.7.0")
             version("androidxHilt", "1.0.0")
             version("detekt", "1.23.1")
@@ -44,6 +46,7 @@ dependencyResolutionManagement {
             plugin("kotlin-jvm", "org.jetbrains.kotlin.jvm").versionRef("kotlin")
             plugin("dagger-hilt", "com.google.dagger.hilt.android").versionRef("hilt")
             plugin("detekt-plugin", "io.gitlab.arturbosch.detekt").versionRef("detekt")
+            plugin("devtools-ksp", "com.google.devtools.ksp").version("ksp")
             library("detekt-formatting", "io.gitlab.arturbosch.detekt", "detekt-formatting").versionRef("detekt")
 
             library("coreKtx", "androidx.core", "core-ktx").versionRef("coreKtx")
@@ -78,6 +81,10 @@ dependencyResolutionManagement {
 
             library("chucker", "com.github.chuckerteam.chucker", "library").versionRef("chucker")
             library("chuckerNoOp", "com.github.chuckerteam.chucker", "library-no-op").versionRef("chucker")
+
+            library("roomRuntime", "androidx.room", "room-runtime").versionRef("room")
+            library("roomCompiler", "androidx.room", "room-compiler").versionRef("room")
+            library("roomKtx", "androidx.room", "room-ktx").versionRef("room")
 
             library("hiltAndroid", "com.google.dagger", "hilt-android").versionRef("hilt")
             library("hiltNavigationCompose", "androidx.hilt", "hilt-navigation-compose").versionRef("androidxHilt")

@@ -45,7 +45,7 @@ fun CommonInputField(
     errorText: String? = null,
     onValueChange: (String) -> Unit,
     trailingIconRes: Any? = null,
-    trailingIconColor: Color = MaterialTheme.additionalColors.icon,
+    trailingIconColor: Color = MaterialTheme.additionalColors.primaryIcon,
     onClickTrailingIcon: (() -> Unit)? = null,
     placeholderText: String? = null,
     shape: Shape = MaterialTheme.shapes.medium.copy(CornerSize(12.dp)),

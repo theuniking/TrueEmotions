@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'com.google.dagger.hilt.android'
     id 'kotlin-kapt'
+    id 'com.google.devtools.ksp'
 }
 
 android {
@@ -38,12 +39,16 @@ dependencies {
     // Modules
     implementation project(':lib:ui')
     implementation project(':lib:domain')
+    implementation project(':lib:data')
 
     implementation libs.bundles.coroutine
     implementation libs.bundles.androidx
     implementation libs.bundles.compose
     implementation libs.hiltAndroid
+    implementation libs.roomRuntime
+    implementation libs.roomKtx
     kapt libs.daggerHiltCompiler
+    ksp libs.roomCompiler
 
     def composeBom = platform(libs.compose.bom)
     implementation composeBom

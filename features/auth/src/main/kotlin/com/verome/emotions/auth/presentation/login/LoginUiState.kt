@@ -10,5 +10,5 @@ internal data class LoginUiState(
     val emailError: VmRes<CharSequence>? = null,
     val passwordError: VmRes<CharSequence>? = null,
     val isPasswordVisible: Boolean = false,
-    val isLoginEnabled: Boolean = false,
+    val isLoginEnabled: Boolean = true,
 )

@@ -60,3 +60,10 @@ fun TextStyle.bold(): TextStyle {
         fontWeight = FontWeight.Bold,
     )
 }
+
+@Composable
+fun TextStyle.semiBold(): TextStyle {
+    return this.copy(
+        fontWeight = FontWeight.SemiBold,
+    )
+}

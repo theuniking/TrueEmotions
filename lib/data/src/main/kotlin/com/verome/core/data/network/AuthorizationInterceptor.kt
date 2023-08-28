@@ -1,6 +1,6 @@
 package com.verome.core.data.network
 
-import com.verome.core.domain.SessionManager
+import com.verome.core.domain.repository.SessionManager
 import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
 import okhttp3.Response
@@ -18,5 +18,4 @@ class AuthorizationInterceptor(
             .build()
         return chain.proceed(request)
     }
-
 }

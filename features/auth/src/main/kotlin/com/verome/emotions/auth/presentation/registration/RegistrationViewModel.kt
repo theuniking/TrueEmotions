@@ -3,8 +3,10 @@ package com.verome.emotions.auth.presentation.registration
 import com.verome.core.domain.empty
 import com.verome.core.ui.base.BaseViewModel
 import com.verome.core.ui.extension.tryToUpdate
+import com.verome.core.ui.navigation.NavigateBackEvent
 import com.verome.core.ui.navigation.OpenScreenEvent
 import com.verome.core.ui.navigation.Screen
+import com.verome.emotions.auth.domain.repository.RegistrationRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -12,7 +14,9 @@ import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
 @HiltViewModel
-class RegistrationViewModel @Inject constructor() : BaseViewModel(), RegistrationController {
+class RegistrationViewModel @Inject constructor(
+    private val repository: RegistrationRepository,
+) : BaseViewModel(), RegistrationController {
     private val _uiState = MutableStateFlow(
         RegistrationUiState(email = String.empty, name = String.empty, password = String.empty),
     )
@@ -43,19 +47,30 @@ class RegistrationViewModel @Inject constructor() : BaseViewModel(), Registratio
     }
 
     override fun onRegisterButtonClick() {
-        // todo: implement data check and save
-        sendEvent(
-            OpenScreenEvent(
-                Screen.Main.Home,
-            ),
+        val value = uiState.value
+
+        // todo: implement data check
+        dataRequest(
+            request = {
+                repository.registerUser(
+                    email = value.email,
+                    name = value.name,
+                    password = value.password,
+                )
+            },
+            onSuccess = {
+                sendEvent(
+                    OpenScreenEvent(
+                        Screen.Main.Home,
+                    ),
+                )
+            },
         )
     }
 
     override fun onLoginButtonClick() {
         sendEvent(
-            OpenScreenEvent(
-                Screen.Auth.LogIn,
-            ),
+            NavigateBackEvent,
         )
     }
 }

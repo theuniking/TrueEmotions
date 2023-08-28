@@ -1,4 +1,4 @@
-package com.verome.core.domain
+package com.verome.core.domain.repository
 
 interface SessionManager {
 
@@ -9,5 +9,4 @@ interface SessionManager {
     suspend fun setTokens(accessToken: String?, refreshToken: String?)
 
     suspend fun logOut()
-
 }
