@@ -11,6 +11,7 @@ val White = Color(0xFFF6F9FF)
 val Grey30 = Color(0xFF7D7D7D)
 val Grey40 = Color(0xFF848484)
 val Grey50 = Color(0xFF8A8A8A)
+val Grey60 = Color(0xFFACAEB3)
 val Grey70 = Color(0xFFBFBFBF)
 val Grey90 = Color(0xFFECF1FD)
 val Indigo30 = Color(0xFF5445F9)
@@ -31,7 +32,8 @@ data class AdditionalColors(
     val error: Color,
     val textTrick: Color,
     val textMain: Color,
-    val icon: Color,
+    val primaryIcon: Color,
+    val secondaryIcon: Color,
     val textLight: Color,
     val btnText: Color,
     val btnDisabledGradientFirst: Color,
@@ -50,7 +52,8 @@ val additionalLightColors = AdditionalColors(
     error = Red70,
     textTrick = Grey50,
     textMain = CoreBlack,
-    icon = Grey40,
+    primaryIcon = Grey40,
+    secondaryIcon = Grey60,
     textLight = CoreWhite,
     btnText = Indigo50,
     btnDisabledGradientFirst = Grey70,

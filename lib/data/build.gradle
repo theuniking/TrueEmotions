@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'com.google.dagger.hilt.android'
     id 'kotlin-kapt'
+    id 'com.google.devtools.ksp'
 }
 
 android {
@@ -34,7 +35,11 @@ dependencies {
     implementation libs.bundles.coroutine
     implementation libs.bundles.androidx
     implementation libs.hiltAndroid
+    implementation libs.roomRuntime
+    implementation libs.roomKtx
     kapt libs.daggerHiltCompiler
+    ksp libs.roomCompiler
+
     implementation libs.timber
 
     debugImplementation libs.chucker

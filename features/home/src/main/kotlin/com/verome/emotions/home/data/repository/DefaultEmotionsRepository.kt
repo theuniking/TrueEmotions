@@ -4,7 +4,7 @@ import com.verome.core.domain.emotions.Emotion
 import com.verome.core.domain.emotions.EmotionColor
 import com.verome.emotions.home.domain.repository.EmotionsRepository
 
-class DefaultEmotionsRepository : EmotionsRepository {
+internal class DefaultEmotionsRepository : EmotionsRepository {
     override suspend fun getEmotions(): List<Emotion> {
         return listOf(
             Emotion(

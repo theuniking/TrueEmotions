@@ -1,5 +1,6 @@
 package com.verome.emotions.home.presentation.home
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -29,7 +30,9 @@ internal fun HomeContent(
         item {
             Column(
                 modifier = Modifier
-                    .padding(horizontal = 16.dp),
+                    .padding(horizontal = 16.dp)
+                    // todo: remove
+                    .clickable { controller.onProfileClick() },
             ) {
                 Text(
                     text = "Welcome back, Darya",
@@ -61,10 +64,10 @@ internal fun HomeContent(
             )
             Spacer(modifier = Modifier.height(8.dp))
         }
-        items(uiState.history) { emotionCard ->
+        items(uiState.history) { emotion ->
             EmotionCard(
                 modifier = Modifier.padding(start = 8.dp, end = 8.dp, bottom = 12.dp),
-                emotion = emotionCard,
+                emotion = emotion,
             )
         }
         item {
@@ -79,7 +82,8 @@ internal fun HomeContentPreview() {
     AppTheme {
         class FakeHomeController : HomeController {
             override fun onActionCardMinuteOfReflectionClicked() = Unit
-            override fun initEmotionCardHistory() = Unit
+            override fun initEmotionHistory() = Unit
+            override fun onProfileClick() = Unit
         }
         HomeContent(uiState = HomeUiState(), controller = FakeHomeController())
     }

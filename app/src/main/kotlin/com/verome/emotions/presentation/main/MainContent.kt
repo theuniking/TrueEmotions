@@ -1,5 +1,6 @@
 package com.verome.emotions.presentation.main
 
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -20,10 +21,13 @@ import com.verome.core.ui.navigation.NavigateBackEvent
 import com.verome.core.ui.navigation.OpenBottomSheetEvent
 import com.verome.core.ui.navigation.OpenScreenEvent
 import com.verome.core.ui.navigation.Screen
+import com.verome.core.ui.theme.BottomSheetShape
+import com.verome.core.ui.theme.additionalColors
 import com.verome.core.ui.widgets.dialog.alert.ShowAlertDialog
 import com.verome.emotions.auth.presentation.login.LoginScreen
 import com.verome.emotions.auth.presentation.registration.RegistrationScreen
 import com.verome.emotions.home.presentation.home.HomeScreen
+import com.verome.emotions.home.presentation.profile.ProfileScreen
 
 @OptIn(ExperimentalMaterialNavigationApi::class)
 @Composable
@@ -64,10 +68,12 @@ internal fun MainContent(uiState: MainUiState, viewModel: MainViewModel) {
 
     ModalBottomSheetLayout(
         bottomSheetNavigator = bottomSheetNavigator,
+        sheetBackgroundColor = MaterialTheme.additionalColors.background,
+        sheetShape = MaterialTheme.shapes.BottomSheetShape,
     ) {
         NavHost(
             navController = navController,
-            startDestination = Screen.Auth.route,
+            startDestination = if (uiState.isAuthorizedUser) Screen.Main.route else Screen.Auth.route,
         ) {
             navigation(
                 route = Screen.Auth.route,
@@ -94,10 +100,11 @@ internal fun MainContent(uiState: MainUiState, viewModel: MainViewModel) {
                 ) {
                     Text("Reflection") // todo: make ReflectionScreen
                 }
-            }
-            bottomSheet(
-                route = Screen.BottomSheetScreen.Profile.route,
-            ) {
+                bottomSheet(
+                    route = Screen.BottomSheetScreen.Profile.route,
+                ) {
+                    ProfileScreen(viewModel = hiltViewModel())
+                }
             }
         }
     }

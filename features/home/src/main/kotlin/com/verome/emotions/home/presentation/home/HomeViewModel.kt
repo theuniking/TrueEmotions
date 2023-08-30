@@ -2,6 +2,7 @@ package com.verome.emotions.home.presentation.home
 
 import com.verome.core.ui.base.BaseViewModel
 import com.verome.core.ui.extension.tryToUpdate
+import com.verome.core.ui.navigation.OpenBottomSheetEvent
 import com.verome.core.ui.navigation.OpenScreenEvent
 import com.verome.core.ui.navigation.Screen
 import com.verome.emotions.home.domain.repository.EmotionsRepository
@@ -13,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val emotionsRepository: EmotionsRepository,
+    private val repository: EmotionsRepository,
 ) : BaseViewModel(), HomeController {
     private val _uiState = MutableStateFlow(
         HomeUiState(),
@@ -21,7 +22,7 @@ class HomeViewModel @Inject constructor(
     internal val uiState: StateFlow<HomeUiState> = _uiState.asStateFlow()
 
     init {
-        initEmotionCardHistory()
+        initEmotionHistory()
     }
 
     override fun onActionCardMinuteOfReflectionClicked() {
@@ -32,10 +33,10 @@ class HomeViewModel @Inject constructor(
         )
     }
 
-    override fun initEmotionCardHistory() {
+    override fun initEmotionHistory() {
         dataRequest(
             request = {
-                emotionsRepository.getEmotions()
+                repository.getEmotions()
             },
             onSuccess = { result ->
                 _uiState.tryToUpdate {
@@ -44,6 +45,14 @@ class HomeViewModel @Inject constructor(
                     )
                 }
             },
+        )
+    }
+
+    override fun onProfileClick() {
+        sendEvent(
+            OpenBottomSheetEvent(
+                Screen.BottomSheetScreen.Profile,
+            ),
         )
     }
 }

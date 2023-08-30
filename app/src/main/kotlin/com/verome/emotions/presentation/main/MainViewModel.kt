@@ -1,14 +1,16 @@
 package com.verome.emotions.presentation.main
 
 import androidx.lifecycle.viewModelScope
+import com.verome.core.data.local.preferences.PreferenceConstants
+import com.verome.core.data.local.preferences.PreferenceManager
 import com.verome.core.domain.message.Message
 import com.verome.core.domain.message.MessageHandler
+import com.verome.core.domain.model.User.Companion.NULL_USER_ID
 import com.verome.core.ui.base.BaseViewModel
 import com.verome.core.ui.extension.tryToUpdate
 import com.verome.core.ui.widgets.dialog.DialogControl
 import com.verome.core.ui.widgets.dialog.DialogResult
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -18,6 +20,7 @@ import javax.inject.Inject
 @HiltViewModel
 internal class MainViewModel @Inject constructor(
     private val messageHandler: MessageHandler,
+    private val preferenceManager: PreferenceManager,
 ) : BaseViewModel() {
 
     private val _uiState = MutableStateFlow(
@@ -47,13 +50,18 @@ internal class MainViewModel @Inject constructor(
     }
 
     private fun authUser() {
-        viewModelScope.launch {
-            delay(2000L)
-            _uiState.tryToUpdate {
-                it.copy(
-                    isSplashVisible = false,
-                )
-            }
-        }
+        dataRequest(
+            request = {
+                preferenceManager.getLong(PreferenceConstants.KEY_USER_ID) != NULL_USER_ID
+            },
+            onSuccess = { isSignedIn ->
+                _uiState.tryToUpdate {
+                    it.copy(
+                        isAuthorizedUser = isSignedIn,
+                        isSplashVisible = false,
+                    )
+                }
+            },
+        )
     }
 }

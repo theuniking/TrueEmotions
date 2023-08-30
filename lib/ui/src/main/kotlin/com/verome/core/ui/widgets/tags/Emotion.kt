@@ -40,6 +40,6 @@ fun Emotion(tag: String, color: Color, isPicked: Boolean = false) {
 @Composable
 private fun EmotionPreview() {
     AppTheme {
-        Emotion(tag = "Emotion", color = MaterialTheme.additionalColors.icon)
+        Emotion(tag = "Emotion", color = MaterialTheme.additionalColors.primaryIcon)
     }
 }
