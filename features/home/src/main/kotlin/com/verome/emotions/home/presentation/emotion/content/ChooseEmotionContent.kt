@@ -24,11 +24,10 @@ import com.verome.core.domain.emotions.EmotionColor
 import com.verome.core.ui.theme.AppTheme
 import com.verome.core.ui.theme.bold
 import com.verome.emotions.home.presentation.emotion.EmotionController
-import com.verome.emotions.home.presentation.emotion.EmotionUiState
 import com.verome.emotions.home.presentation.emotion.content.common.EmotionPreviewExt
 
 @Composable
-internal fun ChooseEmotionContent(uiState: EmotionUiState.Data, controller: EmotionController) {
+internal fun ChooseEmotionContent(controller: EmotionController) {
     Column {
         Spacer(modifier = Modifier.height(15.dp))
         Text(
@@ -108,12 +107,11 @@ private fun CircleEmotion(
     }
 }
 
-@Preview
+@Preview(showSystemUi = true)
 @Composable
 private fun ChooseEmotionContentPreview() {
     AppTheme {
         ChooseEmotionContent(
-            uiState = EmotionPreviewExt.uiState,
             controller = EmotionPreviewExt.FakeEmotionController(),
         )
     }

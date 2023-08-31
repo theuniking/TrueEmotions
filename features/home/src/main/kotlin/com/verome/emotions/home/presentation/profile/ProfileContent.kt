@@ -39,7 +39,7 @@ internal fun ProfileContent(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .heightIn(min = 550.dp, max = 550.dp),
+            .heightIn(min = 600.dp, max = 600.dp),
     ) {
         BottomSheetToolbar(
             title = "Profile".toVmResStr(),

@@ -18,7 +18,10 @@ import javax.inject.Singleton
 object HomeModule {
     @Provides
     @Singleton
-    fun provideCategoryRepository(): EmotionsRepository = DefaultEmotionsRepository()
+    fun provideCategoryRepository(): EmotionsRepository =
+        DefaultEmotionsRepository(
+            dispatcher = Dispatchers.IO,
+        )
 
     @Provides
     @Singleton

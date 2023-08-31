@@ -8,7 +8,7 @@ import com.verome.core.domain.empty
 import com.verome.core.ui.base.BaseViewModel
 import com.verome.core.ui.extension.tryToUpdate
 import com.verome.core.ui.external.app.service.ExternalAppService
-import com.verome.core.ui.navigation.NavigateBackEvent
+import com.verome.core.ui.navigation.CloseBottomSheetEvent
 import com.verome.core.ui.navigation.OpenScreenEvent
 import com.verome.core.ui.navigation.Screen
 import com.verome.emotions.home.domain.repository.ChangeUserDataRepository
@@ -41,7 +41,7 @@ class ProfileViewModel @Inject constructor(
 
     override fun onBackClick() {
         sendEvent(
-            NavigateBackEvent,
+            CloseBottomSheetEvent,
         )
     }
 
