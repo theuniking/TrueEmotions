@@ -59,7 +59,7 @@ fun BottomSheetToolbar(
             }
             Text(
                 text = title.resolve(),
-                style = MaterialTheme.typography.h4.bold(),
+                style = MaterialTheme.typography.h5.bold(),
                 overflow = TextOverflow.Ellipsis,
             )
             Spacer(modifier = Modifier.size(22.dp).padding(start = 5.dp))

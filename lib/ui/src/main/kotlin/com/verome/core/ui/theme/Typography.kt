@@ -25,6 +25,11 @@ val TrueEmotionsTypography = Typography(
     h4 = TextStyle(
         color = CoreBlack,
         fontWeight = FontWeight.Normal,
+        fontSize = 18.sp,
+    ),
+    h5 = TextStyle(
+        color = CoreBlack,
+        fontWeight = FontWeight.Normal,
         fontSize = 17.sp,
     ),
     body1 = TextStyle(

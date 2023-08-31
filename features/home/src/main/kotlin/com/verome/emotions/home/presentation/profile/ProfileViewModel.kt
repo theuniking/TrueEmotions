@@ -39,7 +39,7 @@ class ProfileViewModel @Inject constructor(
         updateUserData()
     }
 
-    override fun onBackClicked() {
+    override fun onBackClick() {
         sendEvent(
             NavigateBackEvent,
         )

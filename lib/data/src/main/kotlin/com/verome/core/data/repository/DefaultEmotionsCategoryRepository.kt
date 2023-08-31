@@ -13,22 +13,22 @@ class DefaultEmotionsCategoryRepository : EmotionsCategoryRepository {
             }
             is EmotionColor.Anger -> {
                 listOf(
-                    "Joy",
+                    "Anger",
                 )
             }
             is EmotionColor.Fear -> {
                 listOf(
-                    "Joy",
+                    "Fear",
                 )
             }
             is EmotionColor.Sadness -> {
                 listOf(
-                    "Joy",
+                    "Sadness",
                 )
             }
             is EmotionColor.Shame -> {
                 listOf(
-                    "Joy",
+                    "Shame",
                 )
             }
         }

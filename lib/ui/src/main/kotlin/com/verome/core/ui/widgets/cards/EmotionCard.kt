@@ -63,6 +63,8 @@ fun EmotionCard(
             FlowRow {
                 emotion.tags.forEach { tag ->
                     Emotion(
+                        modifier = Modifier
+                            .padding(end = 4.dp, bottom = 6.dp),
                         tag = tag,
                         color = colorResource(id = emotion.emotionColor.color),
                         isPicked = true,
