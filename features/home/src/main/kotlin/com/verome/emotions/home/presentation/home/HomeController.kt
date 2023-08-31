@@ -8,4 +8,5 @@ internal interface HomeController {
     fun initEmotionHistory()
     fun onProfileClick()
     fun onNewEmotionClick()
+    fun onTrackerClick()
 }

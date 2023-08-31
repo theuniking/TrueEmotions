@@ -4,7 +4,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
@@ -37,7 +37,9 @@ internal fun ProfileContent(
     controller: ProfileController,
 ) {
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .heightIn(min = 550.dp, max = 550.dp),
     ) {
         BottomSheetToolbar(
             title = "Profile".toVmResStr(),
