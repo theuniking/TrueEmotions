@@ -4,7 +4,8 @@ import androidx.compose.runtime.Stable
 
 @Stable
 internal interface HomeController {
-    fun onActionCardMinuteOfReflectionClicked()
+    fun onActionCardMinuteOfReflectionClick()
     fun initEmotionHistory()
     fun onProfileClick()
+    fun onNewEmotionClick()
 }

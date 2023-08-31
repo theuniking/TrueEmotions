@@ -32,7 +32,7 @@ internal fun HomeContent(
                 modifier = Modifier
                     .padding(horizontal = 16.dp)
                     // todo: remove
-                    .clickable { controller.onProfileClick() },
+                    .clickable { controller.onNewEmotionClick() },
             ) {
                 Text(
                     text = "Welcome back, Darya",
@@ -52,7 +52,7 @@ internal fun HomeContent(
                     ActionCard(
                         backgroundColor = MaterialTheme.additionalColors.actionCard1,
                         title = "Минута Рефлексии",
-                        onClick = controller::onActionCardMinuteOfReflectionClicked,
+                        onClick = controller::onActionCardMinuteOfReflectionClick,
                     )
                 }
             }
@@ -81,9 +81,10 @@ internal fun HomeContent(
 internal fun HomeContentPreview() {
     AppTheme {
         class FakeHomeController : HomeController {
-            override fun onActionCardMinuteOfReflectionClicked() = Unit
+            override fun onActionCardMinuteOfReflectionClick() = Unit
             override fun initEmotionHistory() = Unit
             override fun onProfileClick() = Unit
+            override fun onNewEmotionClick() = Unit
         }
         HomeContent(uiState = HomeUiState(), controller = FakeHomeController())
     }

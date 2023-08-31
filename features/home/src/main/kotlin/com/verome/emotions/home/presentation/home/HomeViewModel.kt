@@ -25,7 +25,7 @@ class HomeViewModel @Inject constructor(
         initEmotionHistory()
     }
 
-    override fun onActionCardMinuteOfReflectionClicked() {
+    override fun onActionCardMinuteOfReflectionClick() {
         sendEvent(
             OpenScreenEvent(
                 Screen.Main.Reflection,
@@ -52,6 +52,14 @@ class HomeViewModel @Inject constructor(
         sendEvent(
             OpenBottomSheetEvent(
                 Screen.BottomSheetScreen.Profile,
+            ),
+        )
+    }
+
+    override fun onNewEmotionClick() {
+        sendEvent(
+            OpenBottomSheetEvent(
+                Screen.BottomSheetScreen.NewEmotion,
             ),
         )
     }

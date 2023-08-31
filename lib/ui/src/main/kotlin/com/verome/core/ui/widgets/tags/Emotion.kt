@@ -2,6 +2,7 @@ package com.verome.core.ui.widgets.tags
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -16,10 +17,15 @@ import com.verome.core.ui.theme.ButtonShape
 import com.verome.core.ui.theme.additionalColors
 
 @Composable
-fun Emotion(tag: String, color: Color, isPicked: Boolean = false) {
+fun Emotion(
+    modifier: Modifier = Modifier,
+    tag: String,
+    color: Color,
+    isPicked: Boolean = false,
+    onClick: (() -> Unit)? = null,
+) {
     Text(
-        modifier = Modifier
-            .padding(end = 4.dp, bottom = 6.dp)
+        modifier = modifier
             .clip(MaterialTheme.shapes.ButtonShape)
             .background(color = if (isPicked) color else Color.Transparent)
             .border(
@@ -29,6 +35,10 @@ fun Emotion(tag: String, color: Color, isPicked: Boolean = false) {
                     else -> Color.Transparent
                 },
                 shape = MaterialTheme.shapes.ButtonShape,
+            )
+            .clickable(
+                enabled = onClick != null,
+                onClick = { onClick?.invoke() },
             )
             .padding(horizontal = 10.dp, vertical = 3.dp),
         text = tag,

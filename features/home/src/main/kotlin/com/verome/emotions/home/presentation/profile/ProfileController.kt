@@ -4,7 +4,7 @@ import androidx.compose.runtime.Stable
 
 @Stable
 internal interface ProfileController {
-    fun onBackClicked()
+    fun onBackClick()
     fun onLogOutButtonClick()
     fun onAvatarClick()
 }

@@ -26,6 +26,7 @@ import com.verome.core.ui.theme.additionalColors
 import com.verome.core.ui.widgets.dialog.alert.ShowAlertDialog
 import com.verome.emotions.auth.presentation.login.LoginScreen
 import com.verome.emotions.auth.presentation.registration.RegistrationScreen
+import com.verome.emotions.home.presentation.emotion.EmotionScreen
 import com.verome.emotions.home.presentation.home.HomeScreen
 import com.verome.emotions.home.presentation.profile.ProfileScreen
 
@@ -104,6 +105,11 @@ internal fun MainContent(uiState: MainUiState, viewModel: MainViewModel) {
                     route = Screen.BottomSheetScreen.Profile.route,
                 ) {
                     ProfileScreen(viewModel = hiltViewModel())
+                }
+                bottomSheet(
+                    route = Screen.BottomSheetScreen.NewEmotion.route,
+                ) {
+                    EmotionScreen(viewModel = hiltViewModel())
                 }
             }
         }

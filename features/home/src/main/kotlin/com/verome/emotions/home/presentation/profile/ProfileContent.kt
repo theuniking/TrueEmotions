@@ -41,7 +41,7 @@ internal fun ProfileContent(
     ) {
         BottomSheetToolbar(
             title = "Profile".toVmResStr(),
-            onBackClick = controller::onBackClicked,
+            onBackClick = controller::onBackClick,
         )
         Spacer(modifier = Modifier.height(12.dp))
         AvatarWidget(
@@ -193,7 +193,7 @@ private fun ProfilePreferences() {
 private fun ProfileContentPreview() {
     AppTheme {
         class FakeProfileController : ProfileController {
-            override fun onBackClicked() = Unit
+            override fun onBackClick() = Unit
             override fun onLogOutButtonClick() = Unit
             override fun onAvatarClick() = Unit
         }

@@ -2,7 +2,9 @@ package com.verome.core.ui.widgets.button
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.ui.Alignment
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.material.Button
@@ -10,7 +12,6 @@ import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -34,18 +35,20 @@ fun DefaultButton(
     style: TextStyle = MaterialTheme.typography.button.bold(),
     colors: Brush? = null,
     shape: CornerBasedShape = MaterialTheme.shapes.ButtonShape,
-    contentPadding: PaddingValues = PaddingValues(horizontal = 74.dp, vertical = 17.dp),
+    contentPadding: PaddingValues = PaddingValues(vertical = 17.dp),
     content: @Composable () -> Unit = {
         DefaultButtonContent(
             text = text,
             style = style,
-            modifier = Modifier.padding(contentPadding),
+            modifier = Modifier.padding(contentPadding).fillMaxWidth(),
             color = MaterialTheme.additionalColors.coreWhite,
         )
     },
+    paddingValuesOutside: PaddingValues = PaddingValues(horizontal = 50.dp),
 ) {
     Button(
-        modifier = Modifier.padding(horizontal = 50.dp)
+        modifier = Modifier
+            .padding(paddingValuesOutside)
             .defaultShadow(shape = shape),
         contentPadding = PaddingValues(0.dp),
         enabled = enabled,

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
+    <color name="core_black">#FF2E2E2E</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="indigo50">#7157FC</color>
     <color name="bg_gradient_first">#8F68FF</color>
     <color name="bg_gradient_second">#5445F9</color>
 </resources>
