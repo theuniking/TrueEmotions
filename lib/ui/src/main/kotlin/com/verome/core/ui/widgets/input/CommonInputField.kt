@@ -71,7 +71,7 @@ fun CommonInputField(
     val trailingIcon = iconGenerating(
         model = trailingIconRes,
         color = trailingIconColor,
-        onClick = { onClickTrailingIcon?.invoke() },
+        onClick = onClickTrailingIcon,
     )
 
     Column {

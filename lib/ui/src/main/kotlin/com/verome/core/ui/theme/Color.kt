@@ -20,6 +20,7 @@ val Indigo70 = Color(0xFF8F68FF)
 val Indigo90 = Color(0xFFAFB7FF)
 val Blue80 = Color(0xFF83AFFF)
 val Red70 = Color(0xFFD97C7C)
+val Green70 = Color(0xFF8DE4A5)
 
 data class AdditionalColors(
     val coreWhite: Color,
@@ -30,6 +31,7 @@ data class AdditionalColors(
     val textFieldBorder: Color,
     val tagBorder: Color,
     val error: Color,
+    val correct: Color,
     val textTrick: Color,
     val textMain: Color,
     val primaryIcon: Color,
@@ -50,6 +52,7 @@ val additionalLightColors = AdditionalColors(
     textFieldBorder = Blue80,
     tagBorder = Grey90,
     error = Red70,
+    correct = Green70,
     textTrick = Grey50,
     textMain = CoreBlack,
     primaryIcon = Grey40,
