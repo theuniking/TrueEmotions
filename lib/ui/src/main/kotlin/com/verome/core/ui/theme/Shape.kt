@@ -6,13 +6,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 
 val shapes = Shapes(
-    small = RoundedCornerShape(4.dp),
-    medium = RoundedCornerShape(8.dp),
-    large = RoundedCornerShape(16.dp),
+    small = RoundedCornerShape((4 * 1.2).dp),
+    medium = RoundedCornerShape((8 * 1.2).dp),
+    large = RoundedCornerShape((16 * 1.2).dp),
 )
 
 val Shapes.BottomSheetShape
-    @Composable get() = RoundedCornerShape(16.dp, 16.dp)
+    @Composable get() = RoundedCornerShape((16 * 1.2).dp, (16 * 1.2).dp)
 
 val Shapes.ButtonShape
     @Composable get() = RoundedCornerShape(50)

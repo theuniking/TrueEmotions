@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.AlertDialog
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -18,6 +19,7 @@ import com.verome.core.domain.localization.string.VmRes
 import com.verome.core.domain.localization.string.resolve
 import com.verome.core.domain.message.Message
 import com.verome.core.ui.theme.AppTheme
+import com.verome.core.ui.theme.ButtonShape
 import com.verome.core.ui.theme.additionalColors
 import com.verome.core.ui.widgets.dialog.DialogControl
 import com.verome.core.ui.widgets.dialog.DialogResult
@@ -47,7 +49,7 @@ private fun AlertDialogContent(
     dialogControl: DialogControl<Message, DialogResult>,
 ) {
     AlertDialog(
-        shape = MaterialTheme.shapes.small,
+        shape = MaterialTheme.shapes.medium,
         title = data.title?.let { text ->
             {
                 Text(
@@ -69,17 +71,23 @@ private fun AlertDialogContent(
         confirmButton = {
             data.positiveButtonText?.let { text ->
                 Button(
-                    modifier = Modifier.padding(end = 8.dp),
+                    modifier = Modifier.padding(end = 8.dp, bottom = 8.dp),
                     onClick = { dialogControl.sendResult(DialogResult.Confirm) },
+                    colors = ButtonDefaults.buttonColors(
+                        backgroundColor = MaterialTheme.additionalColors.btnText,
+                    ),
+                    shape = MaterialTheme.shapes.ButtonShape,
                 ) {
-                    Text(text = text.resolve())
+                    Text(text = text.resolve(), color = MaterialTheme.additionalColors.coreWhite)
                 }
             }
         },
         dismissButton = {
             data.negativeButtonText?.let { text ->
                 Button(
+                    modifier = Modifier.padding(bottom = 8.dp),
                     onClick = { dialogControl.sendResult(DialogResult.Cancel) },
+                    shape = MaterialTheme.shapes.ButtonShape,
                 ) {
                     Text(text = text.resolve())
                 }

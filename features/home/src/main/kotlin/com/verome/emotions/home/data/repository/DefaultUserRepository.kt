@@ -5,16 +5,16 @@ import com.verome.core.data.local.preferences.PreferenceConstants
 import com.verome.core.data.local.preferences.PreferenceManager
 import com.verome.core.data.mapper.toUser
 import com.verome.core.domain.model.User
-import com.verome.emotions.home.domain.repository.ChangeUserDataRepository
+import com.verome.emotions.home.domain.repository.UserRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-internal class DefaultChangeUserDataRepository @Inject constructor(
+internal class DefaultUserRepository @Inject constructor(
     private val dao: UserDao,
     private val preferenceManager: PreferenceManager,
     private val dispatcher: CoroutineDispatcher,
-) : ChangeUserDataRepository {
+) : UserRepository {
     override suspend fun getCurrentUser(): User {
         return dao.getUserById(preferenceManager.getLong(PreferenceConstants.KEY_USER_ID)).toUser()
     }
@@ -26,6 +26,17 @@ internal class DefaultChangeUserDataRepository @Inject constructor(
             dao.setAvatar(
                 userId.toString(),
                 image = image,
+            )
+        }
+    }
+
+    override suspend fun changeName(name: String) {
+        withContext(dispatcher) {
+            val userId = preferenceManager.getLong(PreferenceConstants.KEY_USER_ID)
+            if (userId == 0L) return@withContext
+            dao.setName(
+                userId.toString(),
+                name = name,
             )
         }
     }

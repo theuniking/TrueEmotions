@@ -50,6 +50,8 @@ dependencies {
     kapt libs.daggerHiltCompiler
     ksp libs.roomCompiler
 
+    implementation libs.bundles.coil
+
     def composeBom = platform(libs.compose.bom)
     implementation composeBom
 

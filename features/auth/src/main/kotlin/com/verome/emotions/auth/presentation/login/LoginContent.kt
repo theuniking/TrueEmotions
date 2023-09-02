@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.verome.auth.R
@@ -56,6 +57,7 @@ internal fun LoginContent(
                     text = "Log in",
                     style = MaterialTheme.typography.h1.bold(),
                     color = MaterialTheme.additionalColors.coreWhite,
+                    fontFamily = FontFamily.Default,
                 )
             }
         }

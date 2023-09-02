@@ -29,7 +29,7 @@ fun Emotion(
             .clip(MaterialTheme.shapes.ButtonShape)
             .background(color = if (isPicked) color else Color.Transparent)
             .border(
-                width = 1.dp,
+                width = (1 * 1.2).dp,
                 color = when {
                     !isPicked -> color
                     else -> Color.Transparent
@@ -40,7 +40,7 @@ fun Emotion(
                 enabled = onClick != null,
                 onClick = { onClick?.invoke() },
             )
-            .padding(horizontal = 10.dp, vertical = 3.dp),
+            .padding(horizontal = (10 * 1.2).dp, vertical = (3 * 1.2).dp),
         text = tag,
         style = MaterialTheme.typography.subtitle2,
     )

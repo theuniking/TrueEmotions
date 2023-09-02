@@ -4,7 +4,9 @@ import android.content.Context
 import com.verome.core.ui.activity.ActivityProvider
 import com.verome.core.ui.event.EventBus
 import com.verome.core.ui.external.app.service.DefaultExternalAppService
+import com.verome.core.ui.external.app.service.DefaultUpdateService
 import com.verome.core.ui.external.app.service.ExternalAppService
+import com.verome.core.ui.external.app.service.UpdateService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -34,4 +36,8 @@ object UiModule {
             context = context,
             activityProvider = activityProvider,
         )
+
+    @Provides
+    @Singleton
+    fun provideUpdateService(): UpdateService = DefaultUpdateService()
 }

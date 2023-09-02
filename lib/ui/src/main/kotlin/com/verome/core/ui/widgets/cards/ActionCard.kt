@@ -30,11 +30,15 @@ fun ActionCard(
     Card(
         onClick = onClick,
         backgroundColor = backgroundColor,
-        modifier = modifier.width(82.dp).height(101.dp).padding(end = 8.dp),
+        elevation = 0.dp,
+        modifier = modifier
+            .width((89 * 1.2).dp)
+            .height((101 * 1.2).dp)
+            .padding(end = (8 * 1.2).dp),
     ) {
         Column(
             modifier = Modifier
-                .padding(start = 8.dp, end = 8.dp, bottom = 16.dp),
+                .padding(start = (8 * 1.2).dp, end = (8 * 1.2).dp, bottom = (16 * 1.2).dp),
         ) {
             Spacer(modifier = Modifier.weight(1f))
             Text(

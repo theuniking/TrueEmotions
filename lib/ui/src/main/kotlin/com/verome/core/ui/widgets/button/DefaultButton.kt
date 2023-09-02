@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -44,7 +45,7 @@ fun DefaultButton(
             color = MaterialTheme.additionalColors.coreWhite,
         )
     },
-    paddingValuesOutside: PaddingValues = PaddingValues(horizontal = 50.dp),
+    paddingValuesOutside: PaddingValues = PaddingValues(horizontal = (50 / 1.2).dp),
 ) {
     Button(
         modifier = Modifier
@@ -106,6 +107,7 @@ internal fun DefaultButtonContent(
             textAlign = TextAlign.Center,
             style = style,
             color = color,
+            fontFamily = FontFamily.Default,
         )
     }
 }

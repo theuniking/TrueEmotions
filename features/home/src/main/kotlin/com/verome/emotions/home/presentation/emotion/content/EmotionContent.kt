@@ -5,11 +5,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.verome.core.domain.localization.string.toVmResStr
+import com.verome.core.ui.theme.additionalColors
 import com.verome.core.ui.widgets.toolbar.BottomSheetToolbar
 import com.verome.emotions.home.presentation.emotion.EmotionController
 import com.verome.emotions.home.presentation.emotion.EmotionUiState
@@ -24,7 +26,7 @@ internal fun EmotionContent(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .heightIn(min = 600.dp, max = 600.dp),
+                .heightIn(min = 700.dp, max = 700.dp),
         ) {
             BottomSheetToolbar(
                 title = uiState.currentScreen.title.toVmResStr(),
@@ -56,11 +58,11 @@ internal fun EmotionContent(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .heightIn(min = 600.dp, max = 600.dp),
+                .heightIn(min = 700.dp, max = 700.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
         ) {
-            CircularProgressIndicator()
+            CircularProgressIndicator(color = MaterialTheme.additionalColors.btnText)
         }
     }
 }

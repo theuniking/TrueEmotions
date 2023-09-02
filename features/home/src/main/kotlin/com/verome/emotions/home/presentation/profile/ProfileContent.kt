@@ -28,6 +28,9 @@ import com.verome.core.ui.theme.AppTheme
 import com.verome.core.ui.theme.additionalColors
 import com.verome.core.ui.theme.semiBold
 import com.verome.core.ui.widgets.avatar.AvatarWidget
+import com.verome.core.ui.widgets.dialog.DialogControl
+import com.verome.core.ui.widgets.dialog.input.InputDialogData
+import com.verome.core.ui.widgets.dialog.input.ShowInputDialog
 import com.verome.core.ui.widgets.toolbar.BottomSheetToolbar
 import com.verome.home.R
 
@@ -39,53 +42,60 @@ internal fun ProfileContent(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .heightIn(min = 600.dp, max = 600.dp),
+            .heightIn(min = 700.dp, max = 700.dp),
     ) {
         BottomSheetToolbar(
             title = "Profile".toVmResStr(),
             onBackClick = controller::onBackClick,
         )
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height((12 * 1.2).dp))
         AvatarWidget(
-            model = uiState.image,
+            model = if (uiState is ProfileUiState.Data) uiState.image else String.empty,
             onClick = controller::onAvatarClick,
             modifier = Modifier.align(CenterHorizontally),
         )
-        Spacer(modifier = Modifier.heightIn(12.dp))
+        Spacer(modifier = Modifier.heightIn((12 * 1.2).dp))
         ProfilePersonalData(
-            name = uiState.name,
-            email = uiState.email,
+            name = if (uiState is ProfileUiState.Data) uiState.name else String.empty,
+            email = if (uiState is ProfileUiState.Data) uiState.email else String.empty,
+            onNameClick = controller::onNameClick,
         )
-        Spacer(modifier = Modifier.heightIn(14.dp))
+        Spacer(modifier = Modifier.heightIn((14 * 1.2).dp))
         Divider()
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height((20 * 1.2).dp))
         ProfilePreferences()
-        Spacer(modifier = Modifier.heightIn(14.dp))
+        Spacer(modifier = Modifier.heightIn((14 * 1.2).dp))
         Divider()
-        Spacer(modifier = Modifier.heightIn(12.dp))
+        Spacer(modifier = Modifier.heightIn((12 * 1.2).dp))
         Text(
             text = "Log out",
-            modifier = Modifier.padding(start = 20.dp).clickable { controller.onLogOutButtonClick() },
+            modifier = Modifier
+                .padding(start = (20 * 1.2).dp)
+                .clickable { controller.onLogOutButtonClick() },
             style = MaterialTheme.typography.subtitle1.semiBold(),
             color = MaterialTheme.additionalColors.btnText,
         )
     }
+
+    ShowInputDialog(dialogControl = controller.inputControl)
 }
 
 @Composable
 private fun ProfilePersonalData(
     name: String?,
     email: String?,
+    onNameClick: () -> Unit,
 ) {
-    Column(
-        modifier = Modifier.padding(start = 20.dp),
-    ) {
+    Column {
         Text(
+            modifier = Modifier.padding(start = (20 * 1.2).dp),
             text = "Personal Data",
             style = MaterialTheme.typography.subtitle1.semiBold(),
         )
-        Spacer(modifier = Modifier.height(12.dp))
-        Row {
+        Spacer(modifier = Modifier.height((12 * 1.2).dp))
+        Row(
+            modifier = Modifier.clickable(onClick = onNameClick).padding(start = (20 * 1.2).dp),
+        ) {
             Text(
                 text = "Name",
                 style = MaterialTheme.typography.subtitle1,
@@ -103,14 +113,16 @@ private fun ProfilePersonalData(
                     imageVector = ImageVector.vectorResource(id = R.drawable.ic_arrow_forward),
                     contentDescription = null,
                     tint = MaterialTheme.additionalColors.secondaryIcon,
-                    modifier = Modifier.padding(horizontal = 3.dp),
+                    modifier = Modifier.padding(horizontal = (3 * 1.2).dp),
                 )
             }
         }
-        Spacer(modifier = Modifier.height(12.dp))
-        Row {
+        Spacer(modifier = Modifier.height((12 * 1.2).dp))
+        Row(
+            modifier = Modifier.padding(start = (20 * 1.2).dp),
+        ) {
             Text(
-                text = "Color scheme",
+                text = "E-mail",
                 style = MaterialTheme.typography.subtitle1,
                 color = MaterialTheme.additionalColors.textTrick,
             )
@@ -122,7 +134,7 @@ private fun ProfilePersonalData(
                     text = email ?: String.empty,
                     style = MaterialTheme.typography.subtitle1.semiBold(),
                 )
-                Spacer(modifier = Modifier.width(20.dp))
+                Spacer(modifier = Modifier.width((20 * 1.2).dp))
             }
         }
     }
@@ -131,13 +143,13 @@ private fun ProfilePersonalData(
 @Composable
 private fun ProfilePreferences() {
     Column(
-        modifier = Modifier.padding(start = 20.dp),
+        modifier = Modifier.padding(start = (20 * 1.2).dp),
     ) {
         Text(
             text = "Preferences",
             style = MaterialTheme.typography.subtitle1.semiBold(),
         )
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height((12 * 1.2).dp))
         Row {
             Text(
                 text = "Notifications",
@@ -157,12 +169,12 @@ private fun ProfilePreferences() {
                     contentDescription = null,
                     tint = MaterialTheme.additionalColors.secondaryIcon,
                     modifier = Modifier
-                        .padding(horizontal = 3.dp)
-                        .size(14.dp),
+                        .padding(horizontal = (3 * 1.2).dp)
+                        .size((14 * 1.2).dp),
                 )
             }
         }
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height((12 * 1.2).dp))
         Row {
             Text(
                 text = "Color scheme",
@@ -182,8 +194,8 @@ private fun ProfilePreferences() {
                     contentDescription = null,
                     tint = MaterialTheme.additionalColors.secondaryIcon,
                     modifier = Modifier
-                        .padding(horizontal = 3.dp)
-                        .size(14.dp),
+                        .padding(horizontal = (3 * 1.2).dp)
+                        .size((14 * 1.2).dp),
                 )
             }
         }
@@ -198,9 +210,11 @@ private fun ProfileContentPreview() {
             override fun onBackClick() = Unit
             override fun onLogOutButtonClick() = Unit
             override fun onAvatarClick() = Unit
+            override fun onNameClick() = Unit
+            override val inputControl = DialogControl<InputDialogData, String>()
         }
         ProfileContent(
-            uiState = ProfileUiState(
+            uiState = ProfileUiState.Data(
                 name = "Universe",
                 email = "universe@king.com",
             ),

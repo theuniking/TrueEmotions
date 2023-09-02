@@ -2,9 +2,9 @@ package com.verome.emotions.home.di
 
 import com.verome.core.data.local.UserDatabase
 import com.verome.core.data.local.preferences.PreferenceManager
-import com.verome.emotions.home.data.repository.DefaultChangeUserDataRepository
+import com.verome.emotions.home.data.repository.DefaultUserRepository
 import com.verome.emotions.home.data.repository.DefaultEmotionsRepository
-import com.verome.emotions.home.domain.repository.ChangeUserDataRepository
+import com.verome.emotions.home.domain.repository.UserRepository
 import com.verome.emotions.home.domain.repository.EmotionsRepository
 import dagger.Module
 import dagger.Provides
@@ -18,9 +18,14 @@ import javax.inject.Singleton
 object HomeModule {
     @Provides
     @Singleton
-    fun provideCategoryRepository(): EmotionsRepository =
+    fun provideCategoryRepository(
+        db: UserDatabase,
+        preferenceManager: PreferenceManager,
+    ): EmotionsRepository =
         DefaultEmotionsRepository(
+            dao = db.userDao,
             dispatcher = Dispatchers.IO,
+            preferenceManager = preferenceManager,
         )
 
     @Provides
@@ -28,8 +33,8 @@ object HomeModule {
     fun provideChangeUserDataRepository(
         db: UserDatabase,
         preferenceManager: PreferenceManager,
-    ): ChangeUserDataRepository =
-        DefaultChangeUserDataRepository(
+    ): UserRepository =
+        DefaultUserRepository(
             dao = db.userDao,
             dispatcher = Dispatchers.IO,
             preferenceManager = preferenceManager,

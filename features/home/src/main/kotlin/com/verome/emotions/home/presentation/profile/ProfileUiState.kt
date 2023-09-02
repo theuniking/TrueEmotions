@@ -4,8 +4,12 @@ import android.graphics.Bitmap
 import androidx.compose.runtime.Stable
 
 @Stable
-internal data class ProfileUiState(
-    val name: String? = null,
-    val email: String? = null,
-    val image: Bitmap? = null,
-)
+internal sealed interface ProfileUiState {
+    data object Loading : ProfileUiState
+
+    data class Data(
+        val name: String,
+        val email: String,
+        val image: Bitmap? = null,
+    ) : ProfileUiState
+}

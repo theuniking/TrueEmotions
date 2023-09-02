@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.IconButton
@@ -50,7 +49,7 @@ fun CommonInputField(
     trailingIconColor: Color = MaterialTheme.additionalColors.primaryIcon,
     onClickTrailingIcon: (() -> Unit)? = null,
     placeholderText: String? = null,
-    shape: Shape = MaterialTheme.shapes.medium.copy(CornerSize(12.dp)),
+    shape: Shape = MaterialTheme.shapes.medium,
     maxLines: Int = 1,
     colors: TextFieldColors = TextFieldDefaults.textFieldColors(
         textColor = MaterialTheme.additionalColors.textMain,

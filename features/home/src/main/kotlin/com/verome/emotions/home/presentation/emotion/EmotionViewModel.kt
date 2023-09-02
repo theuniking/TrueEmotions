@@ -6,6 +6,8 @@ import com.verome.core.domain.empty
 import com.verome.core.domain.repository.EmotionsCategoryRepository
 import com.verome.core.ui.base.BaseViewModel
 import com.verome.core.ui.extension.tryToUpdate
+import com.verome.core.ui.external.app.service.Update
+import com.verome.core.ui.external.app.service.UpdateService
 import com.verome.core.ui.navigation.CloseBottomSheetEvent
 import com.verome.core.ui.navigation.NavigateBackEvent
 import com.verome.core.ui.utils.getMillis
@@ -30,6 +32,7 @@ private const val ONE_DAY = 1L
 class EmotionViewModel @Inject constructor(
     private val emotionsCategoryRepository: EmotionsCategoryRepository,
     private val emotionsRepository: EmotionsRepository,
+    private val updateService: UpdateService,
 ) : BaseViewModel(), EmotionController {
     private val _uiState: MutableStateFlow<EmotionUiState> = MutableStateFlow(
         EmotionUiState.Loading,
@@ -131,7 +134,7 @@ class EmotionViewModel @Inject constructor(
     }
 
     override fun onTimeChangeClick() {
-        TODO("Not yet implemented")
+        // todo: implement time change
     }
 
     override fun onEmotionClick(emotionColor: EmotionColor) {
@@ -178,7 +181,8 @@ class EmotionViewModel @Inject constructor(
                 request = {
                     emotionsRepository.insertEmotion(
                         Emotion(
-                            title = data.action,
+                            action = data.action,
+                            whatHappened = data.whatHappened,
                             emotions = data.emotions.filterIndexed { index, _ ->
                                 data.chosenEmotions.contains(index)
                             },
@@ -189,6 +193,7 @@ class EmotionViewModel @Inject constructor(
                 },
                 onSuccess = {
                     sendEvent(CloseBottomSheetEvent)
+                    updateService.update(Update.EMOTIONS)
                 },
             )
         }

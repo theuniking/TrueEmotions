@@ -1,7 +1,6 @@
 package com.verome.core.ui.theme
 
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.MaterialTheme.shapes
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable

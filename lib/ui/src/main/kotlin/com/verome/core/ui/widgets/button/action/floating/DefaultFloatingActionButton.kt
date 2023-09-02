@@ -6,9 +6,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.FloatingActionButton
+import androidx.compose.material.FloatingActionButtonDefaults
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -20,8 +20,10 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.verome.core.ui.R
+import com.verome.core.ui.extension.defaultShadow
 import com.verome.core.ui.theme.AppTheme
 import com.verome.core.ui.theme.additionalColors
+import com.verome.core.ui.widgets.button.extension.zeroElevation
 
 @Composable
 fun DefaultFloatingActionButton(
@@ -33,9 +35,11 @@ fun DefaultFloatingActionButton(
 ) {
     FloatingActionButton(
         onClick = onClick,
+        elevation = FloatingActionButtonDefaults.zeroElevation(),
         shape = shape,
         modifier = Modifier
-            .size(52.dp),
+            .size((52 * 1.2).dp)
+            .defaultShadow(CircleShape),
     ) {
         Box(
             modifier = Modifier
@@ -54,7 +58,7 @@ fun DefaultFloatingActionButton(
             Icon(
                 imageVector = icon,
                 contentDescription = null,
-                modifier = Modifier.size(26.dp),
+                modifier = Modifier.size((26 * 1.2).dp),
                 tint = contentColor,
             )
         }

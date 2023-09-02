@@ -8,7 +8,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
 
-private const val CURVE_CIRCLE_RADIUS = 80f
+private const val CURVE_CIRCLE_RADIUS = 92f
 
 // the coordinates of the first curve
 private val mFirstCurveStartPoint = PointF()
