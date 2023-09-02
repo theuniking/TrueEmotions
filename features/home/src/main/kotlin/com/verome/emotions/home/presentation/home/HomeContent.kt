@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBars
@@ -14,22 +15,24 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.BottomAppBar
 import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.FabPosition
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.verome.core.ui.extension.defaultShadow
+import com.verome.core.domain.empty
 import com.verome.core.ui.theme.AppTheme
 import com.verome.core.ui.theme.additionalColors
-import com.verome.core.ui.theme.bold
+import com.verome.core.ui.theme.fontText
 import com.verome.core.ui.widgets.button.action.floating.DefaultFloatingActionButton
 import com.verome.core.ui.widgets.cards.ActionCard
 import com.verome.core.ui.widgets.cards.EmotionCard
@@ -47,8 +50,7 @@ internal fun HomeContent(
             BottomAppBar(
                 modifier = Modifier
                     .clip(BottomNavShape())
-                    .defaultShadow(BottomNavShape())
-                    .height(46.dp),
+                    .height((46 * 1.2).dp),
                 backgroundColor = MaterialTheme.additionalColors.coreWhite,
                 contentColor = MaterialTheme.additionalColors.primaryIcon,
             ) {
@@ -100,22 +102,28 @@ internal fun HomeContent(
             item {
                 Column(
                     modifier = Modifier
-                        .padding(horizontal = 16.dp),
+                        .padding(horizontal = (16 * 1.2).dp),
                 ) {
-                    Spacer(modifier = Modifier.height(15.dp))
+                    Spacer(modifier = Modifier.height((15 * 1.2).dp))
                     Text(
-                        text = "Welcome back, Darya",
-                        style = MaterialTheme.typography.h2.bold(),
+                        text = "Welcome back, ${
+                            if (uiState is HomeUiState.Data) {
+                                uiState.name
+                            } else {
+                                String.empty
+                            }
+                        }",
+                        style = MaterialTheme.typography.h2.fontText(),
                     )
                     Text(
                         text = "we wish you a good day",
                         style = MaterialTheme.typography.subtitle2,
                     )
                 }
-                Spacer(modifier = Modifier.height(14.dp))
+                Spacer(modifier = Modifier.height((14 * 1.2).dp))
                 LazyRow {
                     item {
-                        Spacer(modifier = Modifier.width(16.dp))
+                        Spacer(modifier = Modifier.width((16 * 1.2).dp))
                     }
                     item {
                         ActionCard(
@@ -125,22 +133,40 @@ internal fun HomeContent(
                         )
                     }
                 }
-                Spacer(modifier = Modifier.height(20.dp))
+                Spacer(modifier = Modifier.height((20 * 1.2).dp))
                 Text(
                     text = "Your history",
-                    style = MaterialTheme.typography.h3.bold(),
-                    modifier = Modifier.padding(horizontal = 16.dp),
+                    style = MaterialTheme.typography.h3.fontText(),
+                    modifier = Modifier.padding(horizontal = (16 * 1.2).dp),
                 )
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height((8 * 1.2).dp))
             }
-            items(uiState.history) { emotion ->
-                EmotionCard(
-                    modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 12.dp),
-                    emotion = emotion,
-                )
+            if (uiState is HomeUiState.Data) {
+                items(uiState.history) { emotion ->
+                    EmotionCard(
+                        modifier = Modifier.padding(
+                            start = (16 * 1.2).dp,
+                            end = (16 * 1.2).dp,
+                            bottom = (12 * 1.2).dp,
+                        ),
+                        emotion = emotion,
+                    )
+                }
+            } else {
+                item {
+                    Column(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                    ) {
+                        Spacer(modifier = Modifier.height((40 * 1.2).dp))
+                        CircularProgressIndicator(
+                            color = MaterialTheme.additionalColors.btnText,
+                        )
+                    }
+                }
             }
             item {
-                Spacer(modifier = Modifier.height(74.dp))
+                Spacer(modifier = Modifier.height((74 * 1.2).dp))
             }
         }
     }
@@ -152,11 +178,16 @@ private fun HomeContentPreview() {
     AppTheme {
         class FakeHomeController : HomeController {
             override fun onActionCardMinuteOfReflectionClick() = Unit
-            override fun initEmotionHistory() = Unit
             override fun onProfileClick() = Unit
             override fun onNewEmotionClick() = Unit
             override fun onTrackerClick() = Unit
         }
-        HomeContent(uiState = HomeUiState(), controller = FakeHomeController())
+        HomeContent(
+            uiState = HomeUiState.Data(
+                name = "Darya",
+                history = emptyList(),
+            ),
+            controller = FakeHomeController(),
+        )
     }
 }

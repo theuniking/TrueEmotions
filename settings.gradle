@@ -15,7 +15,7 @@ dependencyResolutionManagement {
 
     versionCatalogs {
         libs {
-            version("kotlin", "1.9.0") // todo: mb fix
+            version("kotlin", "1.9.0")
             version("compose", "1.5.1")
             version("bom_release_version", "2023.08.00")
             version("splashScreen", "1.0.1")
@@ -46,7 +46,7 @@ dependencyResolutionManagement {
             plugin("kotlin-jvm", "org.jetbrains.kotlin.jvm").versionRef("kotlin")
             plugin("dagger-hilt", "com.google.dagger.hilt.android").versionRef("hilt")
             plugin("detekt-plugin", "io.gitlab.arturbosch.detekt").versionRef("detekt")
-            plugin("devtools-ksp", "com.google.devtools.ksp").version("ksp")
+            plugin("devtools-ksp", "com.google.devtools.ksp").versionRef("ksp")
             library("detekt-formatting", "io.gitlab.arturbosch.detekt", "detekt-formatting").versionRef("detekt")
 
             library("coreKtx", "androidx.core", "core-ktx").versionRef("coreKtx")
@@ -65,6 +65,7 @@ dependencyResolutionManagement {
             library("androidMaterial", "com.google.android.material", "material").version("1.9.0")
 
             library("coil", "io.coil-kt", "coil").versionRef("coil")
+            library("coilGif", "io.coil-kt", "coil-gif").versionRef("coil")
             library("coilCompose", "io.coil-kt", "coil-compose").versionRef("coil")
 
             library("kotlinxCoroutines", "org.jetbrains.kotlinx", "kotlinx-coroutines-core").versionRef("coroutine")
@@ -103,7 +104,7 @@ dependencyResolutionManagement {
             library("ui-tooling-preview", "androidx.compose.ui", "ui-tooling-preview").withoutVersion()
 
             bundle("androidx", ["coreKtx", "appCompat", "activityCompose"])
-            bundle("coil", ["coil", "coilCompose"])
+            bundle("coil", ["coil", "coilCompose", "coilGif"])
             bundle("navigation", ["hiltNavigationCompose", "navigationComponent", "accompanistNavigation"])
             bundle("compose", ["material", "compose_foundation", "compose_ui", "ui-tooling-preview"])
             bundle("serialization", ["koltinxSerialization", "koitlinxJsonSerial"])

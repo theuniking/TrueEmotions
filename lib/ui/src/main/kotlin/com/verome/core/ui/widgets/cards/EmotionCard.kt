@@ -22,7 +22,7 @@ import com.verome.core.domain.emotions.EmotionColor
 import com.verome.core.ui.extension.defaultShadow
 import com.verome.core.ui.theme.AppTheme
 import com.verome.core.ui.theme.additionalColors
-import com.verome.core.ui.theme.bold
+import com.verome.core.ui.theme.fontText
 import com.verome.core.ui.widgets.tags.Emotion
 import com.verome.core.ui.widgets.tags.Tag
 
@@ -41,7 +41,7 @@ fun EmotionCard(
     ) {
         Column(
             modifier = Modifier
-                .padding(start = 12.dp, top = 8.dp, bottom = 8.dp, end = 7.dp),
+                .padding(start = (12 * 1.2).dp, top = (8 * 1.2).dp, bottom = (8 * 1.2).dp, end = (7 * 1.2).dp),
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -57,14 +57,14 @@ fun EmotionCard(
                     style = MaterialTheme.typography.body2,
                 )
             }
-            Spacer(modifier = Modifier.height(10.dp))
-            Text(text = emotion.title, style = MaterialTheme.typography.subtitle1.bold())
-            Spacer(modifier = Modifier.height(6.dp))
+            Spacer(modifier = Modifier.height((10 * 1.2).dp))
+            Text(text = emotion.action, style = MaterialTheme.typography.subtitle1.fontText())
+            Spacer(modifier = Modifier.height((6 * 1.2).dp))
             FlowRow {
                 emotion.tags.forEach { tag ->
                     Emotion(
                         modifier = Modifier
-                            .padding(end = 4.dp, bottom = 6.dp),
+                            .padding(end = (4 * 1.2).dp, bottom = (6 * 1.2).dp),
                         tag = tag,
                         color = colorResource(id = emotion.emotionColor.color),
                         isPicked = true,
@@ -81,7 +81,8 @@ private fun EmotionCardPreview() {
     AppTheme {
         EmotionCard(
             emotion = Emotion(
-                title = "Day of Joy",
+                action = "Day of Joy",
+                whatHappened = "A lot",
                 tags = listOf(
                     "Work",
                     "Cat",

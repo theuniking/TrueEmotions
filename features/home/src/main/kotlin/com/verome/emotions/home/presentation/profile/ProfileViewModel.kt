@@ -4,14 +4,16 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Base64
 import androidx.lifecycle.viewModelScope
-import com.verome.core.domain.empty
 import com.verome.core.ui.base.BaseViewModel
-import com.verome.core.ui.extension.tryToUpdate
 import com.verome.core.ui.external.app.service.ExternalAppService
+import com.verome.core.ui.external.app.service.Update
+import com.verome.core.ui.external.app.service.UpdateService
 import com.verome.core.ui.navigation.CloseBottomSheetEvent
 import com.verome.core.ui.navigation.OpenScreenEvent
 import com.verome.core.ui.navigation.Screen
-import com.verome.emotions.home.domain.repository.ChangeUserDataRepository
+import com.verome.core.ui.widgets.dialog.DialogControl
+import com.verome.core.ui.widgets.dialog.input.InputDialogData
+import com.verome.emotions.home.domain.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,19 +25,19 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
-    private val repository: ChangeUserDataRepository,
+    private val repository: UserRepository,
     private val externalAppService: ExternalAppService,
+    private val updateService: UpdateService,
 ) : BaseViewModel(), ProfileController {
-    private val _uiState = MutableStateFlow(
-        ProfileUiState(
-            email = String.empty,
-            name = String.empty,
-        ),
+    private val _uiState: MutableStateFlow<ProfileUiState> = MutableStateFlow(
+        ProfileUiState.Loading,
     )
     internal val uiState: StateFlow<ProfileUiState> = _uiState.asStateFlow()
+    override val inputControl = DialogControl<InputDialogData, String>()
 
     init {
         handleGalleryEvents()
+        handleUpdateEvents()
         updateUserData()
     }
 
@@ -64,21 +66,59 @@ class ProfileViewModel @Inject constructor(
         externalAppService.openGallery()
     }
 
+    override fun onNameClick() {
+        if (_uiState.value is ProfileUiState.Data) {
+            dataRequest(
+                request = {
+                    inputControl.showForResult(
+                        InputDialogData(
+                            initialText = (uiState.value as ProfileUiState.Data).name,
+                            fieldName = "name",
+                        ),
+                    )
+                },
+                onSuccess = { result ->
+                    if (result == null) return@dataRequest
+                    changeName(result)
+                },
+            )
+        }
+    }
+
+    private fun handleUpdateEvents() {
+        viewModelScope.launch(Dispatchers.IO) {
+            updateService.updateEvents.collect {
+                if (it == Update.USER) {
+                    updateUserData()
+                }
+            }
+        }
+    }
+
+    private fun changeName(name: String) {
+        dataRequest(
+            request = {
+                repository.changeName(name)
+            },
+            onSuccess = {
+                updateService.update(Update.USER)
+            },
+        )
+    }
+
     private fun updateUserData() {
         dataRequest(
             request = {
                 repository.getCurrentUser()
             },
             onSuccess = { user ->
-                _uiState.tryToUpdate {
-                    it.copy(
-                        name = user.name,
-                        email = user.email,
-                        image = user.avatar?.let { avatar ->
-                            getBitmapFromEncodedString(avatar)
-                        },
-                    )
-                }
+                _uiState.value = ProfileUiState.Data(
+                    name = user.name,
+                    email = user.email,
+                    image = user.avatar?.let { avatar ->
+                        getBitmapFromEncodedString(avatar)
+                    },
+                )
             },
         )
     }

@@ -5,7 +5,7 @@ import com.verome.domain.R
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-sealed class EmotionColor(
+open class EmotionColor(
     val name: String,
     val color: Int,
 ) : Parcelable {

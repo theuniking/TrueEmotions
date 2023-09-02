@@ -31,6 +31,9 @@ class DefaultEmotionsCategoryRepository : EmotionsCategoryRepository {
                     "Shame",
                 )
             }
+            else -> {
+                emptyList()
+            }
         }
     }
 }

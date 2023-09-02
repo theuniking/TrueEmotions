@@ -1,7 +1,6 @@
 package com.verome.emotions.presentation.main
 
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.platform.LocalLifecycleOwner
@@ -29,6 +28,7 @@ import com.verome.emotions.auth.presentation.registration.RegistrationScreen
 import com.verome.emotions.home.presentation.emotion.EmotionScreen
 import com.verome.emotions.home.presentation.home.HomeScreen
 import com.verome.emotions.home.presentation.profile.ProfileScreen
+import com.verome.emotions.home.presentation.reflection.ReflectionContent
 import com.verome.emotions.home.presentation.tracker.TrackerScreen
 
 @OptIn(ExperimentalMaterialNavigationApi::class)
@@ -60,6 +60,7 @@ internal fun MainContent(uiState: MainUiState, viewModel: MainViewModel) {
                     is CloseBottomSheetEvent -> {
                         if (bottomSheetNavigator.navigatorSheetState.isVisible) {
                             navController.popBackStack()
+
                         }
                     }
 
@@ -100,7 +101,7 @@ internal fun MainContent(uiState: MainUiState, viewModel: MainViewModel) {
                 composable(
                     route = Screen.Main.Reflection.route,
                 ) {
-                    Text("Reflection") // todo: make ReflectionScreen
+                    ReflectionContent()
                 }
                 bottomSheet(
                     route = Screen.BottomSheetScreen.Profile.route,

@@ -1,6 +1,5 @@
 package com.verome.emotions.home.presentation.tracker
 
-import android.util.Log
 import com.verome.core.ui.base.BaseViewModel
 import com.verome.core.ui.extension.tryToUpdate
 import com.verome.core.ui.navigation.CloseBottomSheetEvent
@@ -40,6 +39,5 @@ class TrackerViewModel @Inject constructor() : BaseViewModel(), TrackerControlle
                 ),
             )
         }
-        Log.d("Bro", "${uiState.value.trackerValues.size}")
     }
 }

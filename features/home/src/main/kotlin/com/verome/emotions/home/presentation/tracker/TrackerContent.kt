@@ -21,13 +21,13 @@ internal fun TrackerContent(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .heightIn(min = 600.dp, max = 600.dp),
+            .heightIn(min = 700.dp, max = 700.dp),
     ) {
         BottomSheetToolbar(
             title = "Tracker".toVmResStr(),
             onBackClick = controller::onBackClick,
         )
-        Spacer(modifier = Modifier.height(40.dp))
+        Spacer(modifier = Modifier.height((40 * 1.2).dp))
         GraphContent(uiState.trackerValues.map { it.toFloat() })
     }
 }

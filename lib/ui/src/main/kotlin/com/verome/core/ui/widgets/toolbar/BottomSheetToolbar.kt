@@ -36,7 +36,7 @@ fun BottomSheetToolbar(
     onBackClick: () -> Unit,
 ) {
     Column(
-        modifier = modifier.height(60.dp),
+        modifier = modifier.height((60 * 1.2).dp),
         verticalArrangement = Arrangement.Bottom,
     ) {
         Row(
@@ -44,17 +44,17 @@ fun BottomSheetToolbar(
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = 12.dp, start = 6.dp, end = 6.dp),
+                .padding(bottom = (12 * 1.2).dp, start = (6 * 1.2).dp, end = (6 * 1.2).dp),
         ) {
             IconButton(
                 onClick = onBackClick,
-                modifier = Modifier.size(22.dp),
+                modifier = Modifier.size((22 * 1.2).dp),
             ) {
                 Icon(
                     imageVector = ImageVector.vectorResource(id = R.drawable.ic_navigate_back),
                     contentDescription = null,
                     tint = MaterialTheme.additionalColors.btnText,
-                    modifier = Modifier.size(22.dp).padding(end = 5.dp),
+                    modifier = Modifier.size((22 * 1.2).dp).padding(end = (5 * 1.2).dp),
                 )
             }
             Text(
@@ -62,7 +62,7 @@ fun BottomSheetToolbar(
                 style = MaterialTheme.typography.h5.bold(),
                 overflow = TextOverflow.Ellipsis,
             )
-            Spacer(modifier = Modifier.size(22.dp).padding(start = 5.dp))
+            Spacer(modifier = Modifier.size((22 * 1.2).dp).padding(start = (5 * 1.2).dp))
         }
         Divider()
     }

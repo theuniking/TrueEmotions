@@ -17,14 +17,14 @@ import com.verome.core.ui.theme.additionalColors
 fun Tag(tag: String) {
     Text(
         modifier = Modifier
-            .padding(end = 4.dp, bottom = 6.dp)
+            .padding(end = (4 * 1.2).dp, bottom = (6 * 1.2).dp)
             .clip(MaterialTheme.shapes.ButtonShape)
             .border(
-                width = 1.dp,
+                width = (1 * 1.2).dp,
                 color = MaterialTheme.additionalColors.tagBorder,
                 shape = MaterialTheme.shapes.ButtonShape,
             )
-            .padding(horizontal = 10.dp, vertical = 3.dp),
+            .padding(horizontal = (10 * 1.2).dp, vertical = (3 * 1.2).dp),
         text = tag,
         style = MaterialTheme.typography.body2,
     )

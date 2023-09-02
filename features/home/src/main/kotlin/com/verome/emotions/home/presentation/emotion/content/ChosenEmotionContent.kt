@@ -16,7 +16,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.verome.core.ui.theme.AppTheme
-import com.verome.core.ui.theme.bold
+import com.verome.core.ui.theme.fontText
 import com.verome.core.ui.widgets.button.DefaultButton
 import com.verome.core.ui.widgets.tags.Emotion
 import com.verome.emotions.home.presentation.emotion.EmotionController
@@ -29,21 +29,21 @@ import com.verome.emotions.home.presentation.emotion.content.common.EmotionScree
 internal fun ChosenEmotionContent(uiState: EmotionUiState.Data, controller: EmotionController) {
     if (uiState.currentScreen !is EmotionScreens.ChosenEmotion) return
     Column {
-        Spacer(modifier = Modifier.height(15.dp))
+        Spacer(modifier = Modifier.height((15 * 1.2).dp))
         Box(
-            modifier = Modifier.padding(horizontal = 16.dp),
+            modifier = Modifier.padding(horizontal = (16 * 1.2).dp),
         ) {
             Column {
                 Text(
                     text = "Choose emotions you feel (up to 5)",
-                    style = MaterialTheme.typography.subtitle1.bold(),
+                    style = MaterialTheme.typography.subtitle1.fontText(),
                 )
-                Spacer(modifier = Modifier.height(10.dp))
+                Spacer(modifier = Modifier.height((10 * 1.2).dp))
                 FlowRow {
                     uiState.emotions.forEachIndexed { index, emotion ->
                         Emotion(
                             modifier = Modifier
-                                .padding(end = 8.dp, bottom = 8.dp),
+                                .padding(end = (8 * 1.2).dp, bottom = (8 * 1.2).dp),
                             tag = emotion,
                             color = colorResource(id = uiState.currentScreen.emotionColor.color),
                             isPicked = uiState.chosenEmotions.contains(index),
@@ -59,7 +59,7 @@ internal fun ChosenEmotionContent(uiState: EmotionUiState.Data, controller: Emot
                     onClick = controller::onDoneButtonClick,
                     modifier = Modifier.fillMaxWidth(),
                 )
-                Spacer(modifier = Modifier.height(29.dp))
+                Spacer(modifier = Modifier.height((29 * 1.2).dp))
             }
         }
     }

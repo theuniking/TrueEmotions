@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -20,7 +19,7 @@ import androidx.compose.ui.unit.dp
 import com.verome.core.ui.extension.defaultShadow
 import com.verome.core.ui.theme.AppTheme
 import com.verome.core.ui.theme.additionalColors
-import com.verome.core.ui.theme.bold
+import com.verome.core.ui.theme.fontText
 import com.verome.core.ui.widgets.button.DefaultButton
 import com.verome.core.ui.widgets.dialog.picker.date.ShowDatePickerDialog
 import com.verome.core.ui.widgets.input.CommonInputField
@@ -31,20 +30,20 @@ import com.verome.emotions.home.presentation.emotion.content.common.EmotionPrevi
 @Composable
 internal fun NewEmotionContent(uiState: EmotionUiState.Data, controller: EmotionController) {
     Column(
-        modifier = Modifier.padding(horizontal = 16.dp),
+        modifier = Modifier.padding(horizontal = (16 * 1.2).dp),
     ) {
-        Spacer(modifier = Modifier.height(14.dp))
+        Spacer(modifier = Modifier.height((14 * 1.2).dp))
         Text(
             text = "Action",
-            style = MaterialTheme.typography.h4.bold(),
+            style = MaterialTheme.typography.h4.fontText(),
         )
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height((8 * 1.2).dp))
         CommonInputField(
             text = uiState.action,
             onValueChange = controller::onActionFieldChange,
             placeholderText = "Type something...",
         )
-        Spacer(modifier = Modifier.height(6.dp))
+        Spacer(modifier = Modifier.height((6 * 1.2).dp))
         Text(
             text = "${uiState.action.length}/100",
             style = MaterialTheme.typography.body1,
@@ -53,9 +52,9 @@ internal fun NewEmotionContent(uiState: EmotionUiState.Data, controller: Emotion
         )
         Text(
             text = "What happened?",
-            style = MaterialTheme.typography.h4.bold(),
+            style = MaterialTheme.typography.h4.fontText(),
         )
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height((8 * 1.2).dp))
         CommonInputField(
             text = uiState.whatHappened,
             onValueChange = controller::onWhatHappenedFieldChange,
@@ -63,38 +62,35 @@ internal fun NewEmotionContent(uiState: EmotionUiState.Data, controller: Emotion
             minLines = 3,
             maxLines = 5,
         )
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height((20 * 1.2).dp))
         Text(
             text = "Action",
-            style = MaterialTheme.typography.h4.bold(),
+            style = MaterialTheme.typography.h4.fontText(),
         )
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height((8 * 1.2).dp))
         CommonInputField(
             text = uiState.action,
             onValueChange = controller::onActionFieldChange,
             placeholderText = "place, event, etc",
         )
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height((24 * 1.2).dp))
         Row(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
                 text = "Date and Time",
-                style = MaterialTheme.typography.h4.bold(),
+                style = MaterialTheme.typography.h4.fontText(),
             )
             Spacer(modifier = Modifier.weight(1f))
             DateTag(text = uiState.date, onClick = controller::onDateChangeClick)
-            Spacer(modifier = Modifier.width(8.dp))
-            // todo: fix
-            DateTag(text = "17:35", onClick = controller::onDateChangeClick)
         }
-        Spacer(modifier = Modifier.height(17.dp))
+        Spacer(modifier = Modifier.height((17 * 1.2).dp))
         DefaultButton(
-            paddingValuesOutside = PaddingValues(horizontal = 34.dp),
+            paddingValuesOutside = PaddingValues(horizontal = (34 * 1.2).dp),
             text = "Continue",
             onClick = controller::onContinueButtonClick,
         )
-        Spacer(modifier = Modifier.height(28.dp))
+        Spacer(modifier = Modifier.height((28 * 1.2).dp))
     }
 
     ShowDatePickerDialog(dialogControl = controller.datePickerControl)
@@ -115,7 +111,7 @@ private fun DateTag(
             modifier = Modifier
                 .clip(MaterialTheme.shapes.medium)
                 .clickable(onClick = onClick)
-                .padding(horizontal = 10.dp, vertical = 8.dp),
+                .padding(horizontal = (10 * 1.2).dp, vertical = (8 * 1.2).dp),
         )
     }
 }

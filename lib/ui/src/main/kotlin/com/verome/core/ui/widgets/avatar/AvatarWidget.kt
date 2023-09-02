@@ -32,7 +32,7 @@ fun AvatarWidget(
 ) {
     Box(
         modifier = modifier
-            .size(112.dp)
+            .size((112 * 1.2).dp)
             .background(
                 color = backgroundColor,
                 shape = CircleShape,
@@ -46,7 +46,7 @@ fun AvatarWidget(
     ) {
         if (model == null) {
             Icon(
-                modifier = Modifier.size(48.dp),
+                modifier = Modifier.size((48 * 1.2).dp),
                 imageVector = ImageVector.vectorResource(id = R.drawable.ic_camera),
                 contentDescription = null,
             )
