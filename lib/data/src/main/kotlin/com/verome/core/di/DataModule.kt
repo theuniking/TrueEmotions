@@ -6,7 +6,9 @@ import androidx.room.Room
 import com.verome.core.data.local.UserDatabase
 import com.verome.core.data.local.preferences.DefaultPreferenceManager
 import com.verome.core.data.local.preferences.PreferenceManager
+import com.verome.core.data.repository.DefaultAuthValidation
 import com.verome.core.data.repository.DefaultEmotionsCategoryRepository
+import com.verome.core.domain.repository.AuthValidation
 import com.verome.core.domain.repository.EmotionsCategoryRepository
 import dagger.Module
 import dagger.Provides
@@ -38,4 +40,8 @@ object DataModule {
     fun providePreferenceManager(
         @ApplicationContext context: Context,
     ): PreferenceManager = DefaultPreferenceManager(context = context)
+
+    @Provides
+    @Singleton
+    fun provideAuthValidation(): AuthValidation = DefaultAuthValidation()
 }

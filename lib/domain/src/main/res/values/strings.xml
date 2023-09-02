@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Common -->
-    <string name="common_close">Закрыть</string>
-    <string name="repeat">Повторить</string>
-    <string name="confirm">Подтвердить</string>
-    <string name="main">Главная</string>
-    <string name="profile">Профиль</string>
-    <string name="open_settings">В настройки</string>
+    <string name="common_close">Close</string>
 
     <!-- Errors -->
-    <string name="error_unexpected">Разработчики уже исправляют проблему. Пожалуйста, попробуйте позже.</string>
-    <string name="error_no_internet_connection">Отсутствует подключение к интернету или оно нестабильно.</string>
-    <string name="error_invalid_response">Ошибка сервера. Пожалуйста, попробуйте позже.</string>
-    <string name="error_no_server_response">Не удалось подключиться к серверу. Пожалуйста, попробуйте позже.</string>
-    <string name="error_ssl_handshake">Не удалось установить подключение из-за параметров сетевой безопасности. Проверьте дату и время устройства.</string>
-    <string name="error_title">Что-то пошло не так</string>
-    <string name="error_from_developers">Разработчики уже исправляют проблему. Попробуйте позже.</string>
-    <string name="error_from_load">Не удалось загрузить страницу.Попробуйте позже.</string>
-    <string name="error_from_server">Ошибка сервера. Попробуйте позже.</string>
-    <string name="not_access_camera_title">Отсутствует доступ к камере</string>
-    <string name="not_access_camera_description">Перейди в настройки приложения и разреши доступ к камере.</string>
+    <string name="error_name_too_long">Name should consist up to 16 symbols.</string>
+    <string name="error_name_too_short">Name should consist of at least 2 symbols.</string>
+    <string name="error_password_too_short">Password should consist of at least 6 symbols.</string>
+    <string name="error_email_invalid">Email is invalid.</string>
+    <string name="error_email_not_found">No such E-mail found.</string>
+    <string name="error_unexpected">The developers are already fixing the problem. Please try again later.</string>
+    <string name="error_no_internet_connection">There is no internet connection or the internet connection is unstable.</string>
+    <string name="error_invalid_response">Server error. Please try again later.</string>
+    <string name="error_no_server_response">Failed to connect to the server. Please try again later.</string>
+    <string name="error_ssl_handshake">Connection could not be established due to network security settings. Check the date and time of the device.</string>
+    <string name="error_title">Something went wrong</string>
+    <string name="error_from_developers">The developers are already fixing the problem. Try again later.</string>
+    <string name="error_from_load">Page failed to load.Try again later.</string>
+    <string name="error_from_server">Server error. Try again later.</string>
+    <string name="not_access_camera_title">No access to the camera</string>
+    <string name="not_access_camera_description">Go to the app settings and allow access to the camera.</string>
 </resources>

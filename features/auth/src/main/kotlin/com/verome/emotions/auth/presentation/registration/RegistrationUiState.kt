@@ -12,5 +12,5 @@ internal data class RegistrationUiState(
     val nameError: VmRes<CharSequence>? = null,
     val passwordError: VmRes<CharSequence>? = null,
     val isPasswordVisible: Boolean = false,
-    val isRegistrationEnabled: Boolean = true,
+    val isRegistrationEnabled: Boolean = false,
 )

@@ -19,10 +19,14 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.verome.auth.R
 import com.verome.core.domain.empty
+import com.verome.core.domain.localization.string.resolve
 import com.verome.core.ui.widgets.input.CommonInputField
 import com.verome.core.ui.theme.AppTheme
 import com.verome.core.ui.theme.additionalColors
@@ -71,8 +75,15 @@ internal fun LoginContent(
                 text = uiState.email,
                 onValueChange = controller::onEmailFieldChange,
                 placeholderText = "Your Email",
-                errorText = String.empty,
-                trailingIconRes = if (uiState.emailError != null) R.drawable.ic_disapprove else null,
+                errorText = uiState.emailError?.resolve() ?: String.empty,
+                trailingIconColor = when {
+                    uiState.emailError != null -> MaterialTheme.additionalColors.error
+                    else -> MaterialTheme.additionalColors.correct
+                },
+                trailingIconRes = when {
+                    uiState.emailError != null -> R.drawable.ic_disapprove
+                    else -> null
+                },
             )
             Spacer(modifier = Modifier.height(8.dp))
             CommonInputField(
@@ -80,6 +91,22 @@ internal fun LoginContent(
                 onValueChange = controller::onPasswordFieldChange,
                 placeholderText = "Your Password",
                 errorText = String.empty,
+                trailingIconColor = MaterialTheme.additionalColors.primaryIcon,
+                keyboardType = KeyboardType.Password,
+                visualTransformation = when {
+                    uiState.isPasswordVisible -> {
+                        VisualTransformation.None
+                    }
+
+                    else -> {
+                        PasswordVisualTransformation()
+                    }
+                },
+                trailingIconRes = when {
+                    uiState.isPasswordVisible -> R.drawable.ic_eye_crossed_out
+                    else -> R.drawable.ic_eye
+                },
+                onClickTrailingIcon = controller::changePasswordVisibility,
             )
             Spacer(modifier = Modifier.weight(1f))
             DefaultButton(
