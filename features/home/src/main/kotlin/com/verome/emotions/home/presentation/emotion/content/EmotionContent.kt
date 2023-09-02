@@ -24,7 +24,7 @@ internal fun EmotionContent(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .heightIn(min = 550.dp, max = 550.dp),
+                .heightIn(min = 600.dp, max = 600.dp),
         ) {
             BottomSheetToolbar(
                 title = uiState.currentScreen.title.toVmResStr(),
@@ -40,7 +40,6 @@ internal fun EmotionContent(
 
                 is EmotionScreens.ChooseEmotion -> {
                     ChooseEmotionContent(
-                        uiState = uiState,
                         controller = controller,
                     )
                 }
@@ -57,7 +56,7 @@ internal fun EmotionContent(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .heightIn(min = 550.dp, max = 550.dp),
+                .heightIn(min = 600.dp, max = 600.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
         ) {

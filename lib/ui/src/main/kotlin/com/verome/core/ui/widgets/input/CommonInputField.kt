@@ -34,6 +34,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.verome.core.domain.empty
 import com.verome.core.ui.extension.defaultShadow
 import com.verome.core.ui.theme.AppTheme
 import com.verome.core.ui.theme.additionalColors
@@ -43,6 +44,7 @@ fun CommonInputField(
     modifier: Modifier = Modifier,
     text: String,
     errorText: String? = null,
+    textStyle: TextStyle = MaterialTheme.typography.subtitle1,
     onValueChange: (String) -> Unit,
     trailingIconRes: Any? = null,
     trailingIconColor: Color = MaterialTheme.additionalColors.primaryIcon,
@@ -63,6 +65,7 @@ fun CommonInputField(
     visualTransformation: VisualTransformation = VisualTransformation.None,
     imeAction: ImeAction = ImeAction.Default,
     keyboardActions: KeyboardActions = KeyboardActions(),
+    minLines: Int = 1,
 ) {
     var isFocused by remember { mutableStateOf(false) }
 
@@ -91,6 +94,7 @@ fun CommonInputField(
                 .defaultShadow(shape = shape)
                 .clip(shape),
             value = text,
+            textStyle = textStyle,
             onValueChange = onValueChange,
             trailingIcon = trailingIcon,
             placeholder = placeholderText?.let {
@@ -107,6 +111,7 @@ fun CommonInputField(
             keyboardOptions = KeyboardOptions(keyboardType = keyboardType, imeAction = imeAction),
             visualTransformation = if (isFocused || text.isNotEmpty()) visualTransformation else VisualTransformation.None,
             keyboardActions = keyboardActions,
+            minLines = minLines,
         )
         if (errorText != null) {
             Text(
@@ -128,7 +133,6 @@ private fun iconGenerating(
     onClick: (() -> Unit)? = null,
 ): @Composable (() -> Unit)? {
     if (model == null) return null
-
     return {
         CommonInputIcon(
             modifier = modifier,
@@ -174,7 +178,7 @@ fun CommonInputDefaultPlaceholder(
 @Preview
 @Composable
 fun CommonInputFieldPreview() {
-    var text by remember { mutableStateOf("") }
+    var text by remember { mutableStateOf(String.empty) }
     AppTheme {
         CommonInputField(
             modifier = Modifier

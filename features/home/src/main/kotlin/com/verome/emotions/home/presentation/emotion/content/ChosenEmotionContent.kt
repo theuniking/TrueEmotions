@@ -65,7 +65,7 @@ internal fun ChosenEmotionContent(uiState: EmotionUiState.Data, controller: Emot
     }
 }
 
-@Preview
+@Preview(showSystemUi = true)
 @Composable
 private fun ChosenEmotionContentPreview() {
     AppTheme {

@@ -39,7 +39,11 @@ internal fun NewEmotionContent(uiState: EmotionUiState.Data, controller: Emotion
             style = MaterialTheme.typography.h4.bold(),
         )
         Spacer(modifier = Modifier.height(8.dp))
-        CommonInputField(text = uiState.action, onValueChange = controller::onActionFieldChange)
+        CommonInputField(
+            text = uiState.action,
+            onValueChange = controller::onActionFieldChange,
+            placeholderText = "Type something...",
+        )
         Spacer(modifier = Modifier.height(6.dp))
         Text(
             text = "${uiState.action.length}/100",
@@ -55,6 +59,9 @@ internal fun NewEmotionContent(uiState: EmotionUiState.Data, controller: Emotion
         CommonInputField(
             text = uiState.whatHappened,
             onValueChange = controller::onWhatHappenedFieldChange,
+            placeholderText = "Type something...",
+            minLines = 3,
+            maxLines = 5,
         )
         Spacer(modifier = Modifier.height(20.dp))
         Text(
@@ -62,7 +69,11 @@ internal fun NewEmotionContent(uiState: EmotionUiState.Data, controller: Emotion
             style = MaterialTheme.typography.h4.bold(),
         )
         Spacer(modifier = Modifier.height(8.dp))
-        CommonInputField(text = uiState.action, onValueChange = controller::onActionFieldChange)
+        CommonInputField(
+            text = uiState.action,
+            onValueChange = controller::onActionFieldChange,
+            placeholderText = "place, event, etc",
+        )
         Spacer(modifier = Modifier.height(24.dp))
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -109,7 +120,7 @@ private fun DateTag(
     }
 }
 
-@Preview
+@Preview(showSystemUi = true)
 @Composable
 private fun NewEmotionContentPreview() {
     AppTheme {

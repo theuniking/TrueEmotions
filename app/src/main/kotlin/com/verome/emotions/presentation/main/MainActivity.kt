@@ -15,6 +15,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.core.view.WindowCompat
 import com.verome.core.ui.activity.ActivityProvider
 import com.verome.core.ui.theme.AppTheme
 import com.verome.core.ui.theme.additionalColors
@@ -31,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         activityProvider.attachActivity(activity = this)
 
-//        WindowCompat.setDecorFitsSystemWindows(window, false)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
 
         viewModel.collectMessages()
         val splashScreen = installSplashScreen()

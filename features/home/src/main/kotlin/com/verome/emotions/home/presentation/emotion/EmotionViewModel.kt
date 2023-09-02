@@ -24,7 +24,6 @@ import javax.inject.Inject
 
 private const val MAX_ACTION_CHARS = 100
 private const val MAX_TAGS_MINUS_ONE = 4
-private const val MIN_PERSON_AGE = 17L
 private const val ONE_DAY = 1L
 
 @HiltViewModel
@@ -36,7 +35,7 @@ class EmotionViewModel @Inject constructor(
         EmotionUiState.Loading,
     )
     internal val uiState: StateFlow<EmotionUiState> = _uiState.asStateFlow()
-    private val date: MutableStateFlow<Long?> = MutableStateFlow(null)
+    private val date: MutableStateFlow<Long> = MutableStateFlow(LocalDate.now().getMillis())
     override val datePickerControl = DialogControl<DatePickerDialogData, Long>()
 
     init {
@@ -111,15 +110,14 @@ class EmotionViewModel @Inject constructor(
                         selectedDate = date.value,
                         calendarConstraints = LongRange(
                             start = 0L,
-                            endInclusive = LocalDate.now().plusDays(ONE_DAY)
-                                .minusYears(MIN_PERSON_AGE).getMillis(),
+                            endInclusive = LocalDate.now().plusDays(ONE_DAY).getMillis(),
                         ),
                     ),
                 )
             },
             onSuccess = { selectedDate ->
-                date.update { selectedDate }
                 selectedDate?.let {
+                    date.update { selectedDate }
                     getUiStateData()?.let { data ->
                         _uiState.tryToUpdate {
                             data.copy(
@@ -205,7 +203,7 @@ class EmotionViewModel @Inject constructor(
                     whatHappened = String.empty,
                     emotions = emptyList(),
                     currentScreen = EmotionScreens.NewEmotion,
-                    date = String.empty,
+                    date = date.value.toTimeDateString(),
                 )
             },
             onSuccess = { data ->

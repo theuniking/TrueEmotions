@@ -3,9 +3,12 @@ package com.verome.emotions.home.presentation.home
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -49,7 +52,6 @@ internal fun HomeContent(
                 backgroundColor = MaterialTheme.additionalColors.coreWhite,
                 contentColor = MaterialTheme.additionalColors.primaryIcon,
             ) {
-                // todo: fix
                 BottomNavigationItem(
                     selected = false,
                     onClick = controller::onTrackerClick,
@@ -92,6 +94,8 @@ internal fun HomeContent(
     ) { paddingValues ->
         LazyColumn(
             contentPadding = paddingValues,
+            modifier = Modifier
+                .windowInsetsPadding(WindowInsets.statusBars),
         ) {
             item {
                 Column(
@@ -131,7 +135,7 @@ internal fun HomeContent(
             }
             items(uiState.history) { emotion ->
                 EmotionCard(
-                    modifier = Modifier.padding(start = 8.dp, end = 8.dp, bottom = 12.dp),
+                    modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 12.dp),
                     emotion = emotion,
                 )
             }
@@ -144,7 +148,7 @@ internal fun HomeContent(
 
 @Preview(showSystemUi = true)
 @Composable
-internal fun HomeContentPreview() {
+private fun HomeContentPreview() {
     AppTheme {
         class FakeHomeController : HomeController {
             override fun onActionCardMinuteOfReflectionClick() = Unit

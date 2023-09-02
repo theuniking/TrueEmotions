@@ -21,10 +21,10 @@ internal class DefaultChangeUserDataRepository @Inject constructor(
 
     override suspend fun changeAvatar(image: String) {
         withContext(dispatcher) {
-            val userId =
-                preferenceManager.getString(PreferenceConstants.KEY_USER_ID) ?: return@withContext
+            val userId = preferenceManager.getLong(PreferenceConstants.KEY_USER_ID)
+            if (userId == 0L) return@withContext
             dao.setAvatar(
-                userId,
+                userId.toString(),
                 image = image,
             )
         }

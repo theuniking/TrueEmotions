@@ -67,7 +67,7 @@ class HomeViewModel @Inject constructor(
     override fun onTrackerClick() {
         sendEvent(
             OpenBottomSheetEvent(
-                Screen.BottomSheetScreen.Profile,
+                Screen.BottomSheetScreen.Tracker,
             ),
         )
     }

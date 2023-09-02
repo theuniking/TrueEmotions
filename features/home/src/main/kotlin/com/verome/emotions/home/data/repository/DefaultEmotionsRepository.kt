@@ -3,8 +3,11 @@ package com.verome.emotions.home.data.repository
 import com.verome.core.domain.emotions.Emotion
 import com.verome.core.domain.emotions.EmotionColor
 import com.verome.emotions.home.domain.repository.EmotionsRepository
+import kotlinx.coroutines.CoroutineDispatcher
 
-internal class DefaultEmotionsRepository : EmotionsRepository {
+internal class DefaultEmotionsRepository(
+    private val dispatcher: CoroutineDispatcher,
+) : EmotionsRepository {
     override suspend fun getEmotions(): List<Emotion> {
         return listOf(
             Emotion(
@@ -21,6 +24,6 @@ internal class DefaultEmotionsRepository : EmotionsRepository {
     }
 
     override suspend fun insertEmotion(emotion: Emotion) {
-        // todo: implement emotion insertion
+        // todo: implement insertion
     }
 }

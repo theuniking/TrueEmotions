@@ -29,6 +29,7 @@ import com.verome.emotions.auth.presentation.registration.RegistrationScreen
 import com.verome.emotions.home.presentation.emotion.EmotionScreen
 import com.verome.emotions.home.presentation.home.HomeScreen
 import com.verome.emotions.home.presentation.profile.ProfileScreen
+import com.verome.emotions.home.presentation.tracker.TrackerScreen
 
 @OptIn(ExperimentalMaterialNavigationApi::class)
 @Composable
@@ -110,6 +111,11 @@ internal fun MainContent(uiState: MainUiState, viewModel: MainViewModel) {
                     route = Screen.BottomSheetScreen.NewEmotion.route,
                 ) {
                     EmotionScreen(viewModel = hiltViewModel())
+                }
+                bottomSheet(
+                    route = Screen.BottomSheetScreen.Tracker.route,
+                ) {
+                    TrackerScreen(viewModel = hiltViewModel())
                 }
             }
         }
