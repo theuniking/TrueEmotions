@@ -11,6 +11,7 @@ internal interface EmotionController {
     fun onBackClick()
     fun onActionFieldChange(action: String)
     fun onWhatHappenedFieldChange(whatHappened: String)
+    fun onTagsFieldChange(tags: String)
     fun onDateChangeClick()
     fun onTimeChangeClick()
     fun onEmotionClick(emotionColor: EmotionColor)

@@ -5,12 +5,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.verome.core.ui.theme.additionalColors
 
-fun Modifier.defaultShadow(shape: Shape): Modifier = composed {
+fun Modifier.defaultShadow(shape: Shape, elevation: Dp = 10.dp): Modifier = composed {
     this.shadow(
-        elevation = 10.dp,
+        elevation = elevation,
         shape = shape,
         spotColor = MaterialTheme.additionalColors.btnDisabledGradientFirst,
         ambientColor = MaterialTheme.additionalColors.btnDisabledGradientSecond,

@@ -7,17 +7,23 @@ import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
 import com.google.accompanist.navigation.material.ModalBottomSheetLayout
 import com.google.accompanist.navigation.material.bottomSheet
 import com.google.accompanist.navigation.material.rememberBottomSheetNavigator
+import com.verome.core.domain.emotions.Emotion.Companion.DEFAULT_FALSE_LONG
+import com.verome.core.domain.emotions.Emotion.Companion.EMOTION_ID_NAME
+import com.verome.core.domain.emotions.Emotion.Companion.EMOTION_ID_PARAMETER
 import com.verome.core.ui.navigation.CloseBottomSheetEvent
 import com.verome.core.ui.navigation.NavigateBackEvent
 import com.verome.core.ui.navigation.OpenBottomSheetEvent
+import com.verome.core.ui.navigation.OpenBottomSheetWithParametersEvent
 import com.verome.core.ui.navigation.OpenScreenEvent
 import com.verome.core.ui.navigation.Screen
 import com.verome.core.ui.theme.BottomSheetShape
@@ -57,10 +63,15 @@ internal fun MainContent(uiState: MainUiState, viewModel: MainViewModel) {
                         }
                     }
 
+                    is OpenBottomSheetWithParametersEvent -> {
+                        if (value.screen is Screen.BottomSheetScreen) {
+                            navController.navigate(value.screen.route + value.parameters)
+                        }
+                    }
+
                     is CloseBottomSheetEvent -> {
                         if (bottomSheetNavigator.navigatorSheetState.isVisible) {
                             navController.popBackStack()
-
                         }
                     }
 
@@ -109,7 +120,15 @@ internal fun MainContent(uiState: MainUiState, viewModel: MainViewModel) {
                     ProfileScreen(viewModel = hiltViewModel())
                 }
                 bottomSheet(
-                    route = Screen.BottomSheetScreen.NewEmotion.route,
+                    route = Screen.BottomSheetScreen.AddEditEmotion.route + EMOTION_ID_PARAMETER,
+                    arguments = listOf(
+                        navArgument(
+                            name = EMOTION_ID_NAME,
+                        ) {
+                            type = NavType.LongType
+                            defaultValue = DEFAULT_FALSE_LONG
+                        },
+                    ),
                 ) {
                     EmotionScreen(viewModel = hiltViewModel())
                 }

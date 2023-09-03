@@ -1,5 +1,6 @@
 package com.verome.emotions.home.presentation.home
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -25,6 +26,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -47,43 +49,45 @@ internal fun HomeContent(
     Scaffold(
         backgroundColor = MaterialTheme.additionalColors.background,
         bottomBar = {
-            BottomAppBar(
-                modifier = Modifier
-                    .clip(BottomNavShape())
-                    .height((46 * 1.2).dp),
-                backgroundColor = MaterialTheme.additionalColors.coreWhite,
-                contentColor = MaterialTheme.additionalColors.primaryIcon,
-            ) {
-                BottomNavigationItem(
-                    selected = false,
-                    onClick = controller::onTrackerClick,
-                    icon = {
-                        Row {
-                            Spacer(modifier = Modifier.weight(1f))
-                            Icon(
-                                imageVector = ImageVector.vectorResource(id = R.drawable.ic_tracker),
-                                contentDescription = null,
-                                tint = MaterialTheme.additionalColors.primaryIcon,
-                            )
-                            Spacer(modifier = Modifier.weight(2f))
-                        }
-                    },
-                )
-                BottomNavigationItem(
-                    selected = false,
-                    onClick = controller::onProfileClick,
-                    icon = {
-                        Row {
-                            Spacer(modifier = Modifier.weight(2f))
-                            Icon(
-                                imageVector = ImageVector.vectorResource(id = R.drawable.ic_profile),
-                                contentDescription = null,
-                                tint = MaterialTheme.additionalColors.primaryIcon,
-                            )
-                            Spacer(modifier = Modifier.weight(1f))
-                        }
-                    },
-                )
+            Box(modifier = Modifier.shadow(shape = BottomNavShape(), elevation = 15.dp)) {
+                BottomAppBar(
+                    modifier = Modifier
+                        .clip(BottomNavShape())
+                        .height((46 * 1.2).dp),
+                    backgroundColor = MaterialTheme.additionalColors.coreWhite,
+                    contentColor = MaterialTheme.additionalColors.primaryIcon,
+                ) {
+                    BottomNavigationItem(
+                        selected = false,
+                        onClick = controller::onTrackerClick,
+                        icon = {
+                            Row {
+                                Spacer(modifier = Modifier.weight(1f))
+                                Icon(
+                                    imageVector = ImageVector.vectorResource(id = R.drawable.ic_tracker),
+                                    contentDescription = null,
+                                    tint = MaterialTheme.additionalColors.primaryIcon,
+                                )
+                                Spacer(modifier = Modifier.weight(2f))
+                            }
+                        },
+                    )
+                    BottomNavigationItem(
+                        selected = false,
+                        onClick = controller::onProfileClick,
+                        icon = {
+                            Row {
+                                Spacer(modifier = Modifier.weight(2f))
+                                Icon(
+                                    imageVector = ImageVector.vectorResource(id = R.drawable.ic_profile),
+                                    contentDescription = null,
+                                    tint = MaterialTheme.additionalColors.primaryIcon,
+                                )
+                                Spacer(modifier = Modifier.weight(1f))
+                            }
+                        },
+                    )
+                }
             }
         },
         floatingActionButtonPosition = FabPosition.Center,
@@ -150,6 +154,7 @@ internal fun HomeContent(
                             bottom = (12 * 1.2).dp,
                         ),
                         emotion = emotion,
+                        onClick = controller::onEmotionClick,
                     )
                 }
             } else {
@@ -178,6 +183,7 @@ private fun HomeContentPreview() {
     AppTheme {
         class FakeHomeController : HomeController {
             override fun onActionCardMinuteOfReflectionClick() = Unit
+            override fun onEmotionClick(emotionId: Long) = Unit
             override fun onProfileClick() = Unit
             override fun onNewEmotionClick() = Unit
             override fun onTrackerClick() = Unit

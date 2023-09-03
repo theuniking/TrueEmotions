@@ -33,7 +33,7 @@ internal fun EmotionContent(
                 onBackClick = controller::onBackClick,
             )
             when (uiState.currentScreen) {
-                is EmotionScreens.NewEmotion -> {
+                is EmotionScreens.AddEditEmotion -> {
                     NewEmotionContent(
                         uiState = uiState,
                         controller = controller,

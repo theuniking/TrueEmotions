@@ -5,14 +5,17 @@ import com.verome.core.ui.widgets.dialog.DialogControl
 import com.verome.core.ui.widgets.dialog.picker.date.DatePickerDialogData
 import com.verome.emotions.home.presentation.emotion.EmotionController
 import com.verome.emotions.home.presentation.emotion.EmotionUiState
+import java.time.LocalDateTime
 
 internal object EmotionPreviewExt {
     val uiState: EmotionUiState.Data = EmotionUiState.Data(
         action = "Some stuff happened",
         whatHappened = "For example, this",
+        tags = "place, event, etc",
         emotions = emptyList(),
-        currentScreen = EmotionScreens.NewEmotion,
-        date = "16 aug",
+        currentScreen = EmotionScreens.AddEditEmotion(),
+        emotionColor = EmotionColor.Joy,
+        date = LocalDateTime.now(),
     )
 
     class FakeEmotionController : EmotionController {
@@ -20,6 +23,7 @@ internal object EmotionPreviewExt {
         override fun onBackClick() = Unit
         override fun onActionFieldChange(action: String) = Unit
         override fun onWhatHappenedFieldChange(whatHappened: String) = Unit
+        override fun onTagsFieldChange(tags: String) = Unit
         override fun onDateChangeClick() = Unit
         override fun onTimeChangeClick() = Unit
         override fun onEmotionClick(emotionColor: EmotionColor) = Unit
