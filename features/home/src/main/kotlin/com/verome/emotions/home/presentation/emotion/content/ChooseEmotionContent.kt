@@ -22,6 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.verome.core.domain.emotions.EmotionColor
+import com.verome.core.ui.extension.defaultShadow
 import com.verome.core.ui.theme.AppTheme
 import com.verome.core.ui.theme.fontText
 import com.verome.emotions.home.presentation.emotion.EmotionController
@@ -93,6 +94,7 @@ private fun CircleEmotion(
 ) {
     Box(
         modifier = modifier
+            .defaultShadow(shape = CircleShape, elevation = 5.dp)
             .size((105 * 1.2).dp)
             .clip(CircleShape)
             .background(colorResource(emotionColor.color))

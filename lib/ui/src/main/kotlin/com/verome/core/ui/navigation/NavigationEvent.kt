@@ -18,6 +18,11 @@ object NavigateBackEvent : NavigationEvent()
 class OpenBottomSheetEvent(val screen: Screen) : NavigationEvent()
 
 /**
+ * Данные события используются для открытия Bottomsheet с заданными параметрами
+ */
+class OpenBottomSheetWithParametersEvent(val screen: Screen, val parameters: String) : NavigationEvent()
+
+/**
  * Данное событие используется для закрытия Bottomsheet
  */
 object CloseBottomSheetEvent : NavigationEvent()

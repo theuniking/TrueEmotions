@@ -7,6 +7,7 @@ import com.verome.core.domain.empty
 
 fun EmotionEntity.toEmotion(): Emotion {
     return Emotion(
+        emotionId = id,
         action = action,
         whatHappened = whatHappened,
         date = date,
@@ -15,8 +16,10 @@ fun EmotionEntity.toEmotion(): Emotion {
         emotionColor = EmotionColor(String.empty, color = color),
     )
 }
+
 fun Emotion.toEmotionEntity(userId: Long): EmotionEntity {
     return EmotionEntity(
+        id = emotionId,
         action = action,
         whatHappened = whatHappened,
         date = date,

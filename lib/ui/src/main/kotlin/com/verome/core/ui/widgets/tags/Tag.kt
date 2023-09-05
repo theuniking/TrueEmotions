@@ -24,7 +24,7 @@ fun Tag(tag: String) {
                 color = MaterialTheme.additionalColors.tagBorder,
                 shape = MaterialTheme.shapes.ButtonShape,
             )
-            .padding(horizontal = (10 * 1.2).dp, vertical = (3 * 1.2).dp),
+            .padding(horizontal = (10 * 1.2).dp),
         text = tag,
         style = MaterialTheme.typography.body2,
     )

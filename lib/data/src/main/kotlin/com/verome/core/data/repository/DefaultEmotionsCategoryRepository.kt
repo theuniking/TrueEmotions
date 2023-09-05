@@ -8,27 +8,83 @@ class DefaultEmotionsCategoryRepository : EmotionsCategoryRepository {
         return when (emotion) {
             is EmotionColor.Joy -> {
                 listOf(
-                    "Joy",
+                    "Feeling of happiness",
+                    "Fun",
+                    "Enjoyment",
+                    "Satisfaction",
+                    "Peace",
+                    "Love",
+                    "Delight",
+                    "Pleasure",
+                    "Euphoria",
+                    "Pride",
+                    "Recognition",
+                    "Friendliness",
+                    "Trust",
+                    "Kindness",
+                    "Bliss",
+                    "Sympathy",
+                    "Enthusiasm",
+                    "Admiration",
+                    "Astonishment",
+                    "Comfort",
+                    "Harmony",
                 )
             }
             is EmotionColor.Anger -> {
                 listOf(
-                    "Anger",
+                    "Fun",
+                    "Peace",
+                    "Love",
+                    "Delight",
+                    "Long emotion name",
+                    "Peace",
+                    "Fun",
+                    "Peace",
+                    "Love",
+                    "Delight",
                 )
             }
             is EmotionColor.Fear -> {
                 listOf(
-                    "Fear",
+                    "Fun",
+                    "Peace",
+                    "Love",
+                    "Delight",
+                    "Long emotion name",
+                    "Peace",
+                    "Fun",
+                    "Peace",
+                    "Love",
+                    "Delight",
                 )
             }
             is EmotionColor.Sadness -> {
                 listOf(
-                    "Sadness",
+                    "Fun",
+                    "Peace",
+                    "Love",
+                    "Delight",
+                    "Long emotion name",
+                    "Peace",
+                    "Fun",
+                    "Peace",
+                    "Love",
+                    "Delight",
                 )
             }
             is EmotionColor.Shame -> {
                 listOf(
-                    "Shame",
+                    "Fun",
+                    "Peace",
+                    "Love",
+                    "Delight",
+                    "Long emotion name",
+                    "Peace",
+                    "Fun",
+                    "Peace",
+                    "Love",
+                    "Delight",
                 )
             }
             else -> {

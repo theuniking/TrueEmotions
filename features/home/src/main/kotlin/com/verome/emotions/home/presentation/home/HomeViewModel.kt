@@ -2,12 +2,14 @@ package com.verome.emotions.home.presentation.home
 
 import androidx.lifecycle.viewModelScope
 import com.verome.core.domain.emotions.Emotion
+import com.verome.core.domain.emotions.Emotion.Companion.EMOTION_ID_WITHOUT_PARAMETER
 import com.verome.core.domain.model.User
 import com.verome.core.ui.base.BaseViewModel
 import com.verome.core.ui.extension.tryToUpdate
 import com.verome.core.ui.external.app.service.Update
 import com.verome.core.ui.external.app.service.UpdateService
 import com.verome.core.ui.navigation.OpenBottomSheetEvent
+import com.verome.core.ui.navigation.OpenBottomSheetWithParametersEvent
 import com.verome.core.ui.navigation.OpenScreenEvent
 import com.verome.core.ui.navigation.Screen
 import com.verome.emotions.home.domain.repository.EmotionsRepository
@@ -45,6 +47,15 @@ class HomeViewModel @Inject constructor(
         )
     }
 
+    override fun onEmotionClick(emotionId: Long) {
+        sendEvent(
+            OpenBottomSheetWithParametersEvent(
+                screen = Screen.BottomSheetScreen.AddEditEmotion,
+                parameters = EMOTION_ID_WITHOUT_PARAMETER + emotionId,
+            ),
+        )
+    }
+
     override fun onProfileClick() {
         sendEvent(
             OpenBottomSheetEvent(
@@ -56,7 +67,7 @@ class HomeViewModel @Inject constructor(
     override fun onNewEmotionClick() {
         sendEvent(
             OpenBottomSheetEvent(
-                Screen.BottomSheetScreen.NewEmotion,
+                Screen.BottomSheetScreen.AddEditEmotion,
             ),
         )
     }

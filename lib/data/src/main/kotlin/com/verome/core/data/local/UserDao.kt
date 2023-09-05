@@ -17,6 +17,9 @@ interface UserDao {
     @Query("SELECT * FROM userEntity WHERE id = :id")
     suspend fun getUserById(id: Long): UserEntity
 
+    @Query("SELECT * FROM emotionEntity WHERE id = :id")
+    suspend fun getEmotionById(id: Long): EmotionEntity
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveUser(userEntity: UserEntity): Long
 

@@ -1,6 +1,9 @@
 package com.verome.emotions.home.presentation.emotion
 
+import androidx.lifecycle.SavedStateHandle
 import com.verome.core.domain.emotions.Emotion
+import com.verome.core.domain.emotions.Emotion.Companion.DEFAULT_FALSE_LONG
+import com.verome.core.domain.emotions.Emotion.Companion.EMOTION_ID_NAME
 import com.verome.core.domain.emotions.EmotionColor
 import com.verome.core.domain.empty
 import com.verome.core.domain.repository.EmotionsCategoryRepository
@@ -11,7 +14,6 @@ import com.verome.core.ui.external.app.service.UpdateService
 import com.verome.core.ui.navigation.CloseBottomSheetEvent
 import com.verome.core.ui.navigation.NavigateBackEvent
 import com.verome.core.ui.utils.getMillis
-import com.verome.core.ui.utils.toTimeDateString
 import com.verome.core.ui.widgets.dialog.DialogControl
 import com.verome.core.ui.widgets.dialog.picker.date.DatePickerDialogData
 import com.verome.emotions.home.domain.repository.EmotionsRepository
@@ -21,15 +23,22 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import java.time.Instant
 import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.ZoneId
 import javax.inject.Inject
 
+private const val NEW_EMOTION_NAME = "New Emotion"
 private const val MAX_ACTION_CHARS = 100
 private const val MAX_TAGS_MINUS_ONE = 4
 private const val ONE_DAY = 1L
+private const val TAGS_SPLIT_BY = ","
+private const val EMPTY_SPACE = " "
 
 @HiltViewModel
 class EmotionViewModel @Inject constructor(
+    private val savedStateHandle: SavedStateHandle,
     private val emotionsCategoryRepository: EmotionsCategoryRepository,
     private val emotionsRepository: EmotionsRepository,
     private val updateService: UpdateService,
@@ -58,7 +67,7 @@ class EmotionViewModel @Inject constructor(
     override fun onBackClick() {
         getUiStateData()?.let { data ->
             when (data.currentScreen) {
-                is EmotionScreens.NewEmotion -> {
+                is EmotionScreens.AddEditEmotion -> {
                     sendEvent(
                         NavigateBackEvent,
                     )
@@ -67,7 +76,9 @@ class EmotionViewModel @Inject constructor(
                 is EmotionScreens.ChooseEmotion -> {
                     _uiState.tryToUpdate {
                         data.copy(
-                            currentScreen = EmotionScreens.NewEmotion,
+                            currentScreen = EmotionScreens.AddEditEmotion(
+                                isNewEmotion = data.currentScreen.title == NEW_EMOTION_NAME,
+                            ),
                         )
                     }
                 }
@@ -105,6 +116,16 @@ class EmotionViewModel @Inject constructor(
         }
     }
 
+    override fun onTagsFieldChange(tags: String) {
+        getUiStateData()?.let { data ->
+            _uiState.tryToUpdate {
+                data.copy(
+                    tags = tags,
+                )
+            }
+        }
+    }
+
     override fun onDateChangeClick() {
         dataRequest(
             request = {
@@ -124,7 +145,10 @@ class EmotionViewModel @Inject constructor(
                     getUiStateData()?.let { data ->
                         _uiState.tryToUpdate {
                             data.copy(
-                                date = selectedDate.toTimeDateString(),
+                                date = LocalDateTime.ofInstant(
+                                    Instant.ofEpochMilli(date.value),
+                                    ZoneId.systemDefault(),
+                                ),
                             )
                         }
                     }
@@ -147,6 +171,7 @@ class EmotionViewModel @Inject constructor(
                     _uiState.tryToUpdate {
                         data.copy(
                             emotions = emotions,
+                            emotionColor = emotionColor,
                             currentScreen = EmotionScreens.ChosenEmotion(emotionColor = emotionColor),
                         )
                     }
@@ -181,13 +206,19 @@ class EmotionViewModel @Inject constructor(
                 request = {
                     emotionsRepository.insertEmotion(
                         Emotion(
+                            emotionId = data.emotionId,
                             action = data.action,
                             whatHappened = data.whatHappened,
                             emotions = data.emotions.filterIndexed { index, _ ->
                                 data.chosenEmotions.contains(index)
                             },
-                            emotionColor = EmotionColor.Anger,
-                            tags = emptyList(),
+                            emotionColor = data.emotionColor,
+                            tags = data.tags.split(TAGS_SPLIT_BY).map { it.trim() }
+                                .filter { it.isNotEmpty() },
+                            date = LocalDateTime.ofInstant(
+                                Instant.ofEpochMilli(date.value),
+                                ZoneId.systemDefault(),
+                            ),
                         ),
                     )
                 },
@@ -200,19 +231,36 @@ class EmotionViewModel @Inject constructor(
     }
 
     private fun initData() {
-        // todo: implement repository connection
         dataRequest(
             request = {
-                EmotionUiState.Data(
-                    action = String.empty,
-                    whatHappened = String.empty,
-                    emotions = emptyList(),
-                    currentScreen = EmotionScreens.NewEmotion,
-                    date = date.value.toTimeDateString(),
-                )
+                savedStateHandle.get<Long>(EMOTION_ID_NAME)?.let { emotionId ->
+                    if (emotionId == DEFAULT_FALSE_LONG) return@let null
+                    emotionsRepository.getEmotionById(emotionId = emotionId)
+                }
             },
             onSuccess = { data ->
-                _uiState.value = data
+                _uiState.value = data?.let {
+                    date.tryToUpdate {
+                        data.date.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()
+                    }
+                    EmotionUiState.Data(
+                        emotionId = data.emotionId,
+                        action = data.action,
+                        whatHappened = data.whatHappened,
+                        tags = data.tags.joinToString(TAGS_SPLIT_BY + EMPTY_SPACE),
+                        date = data.date,
+                        emotions = data.emotions,
+                        emotionColor = data.emotionColor,
+                    )
+                } ?: EmotionUiState.Data(
+                    action = String.empty,
+                    whatHappened = String.empty,
+                    date = LocalDateTime.now(),
+                    emotions = emptyList(),
+                    tags = String.empty,
+                    chosenEmotions = emptyList(),
+                    emotionColor = EmotionColor(name = String.empty, color = 0),
+                )
             },
         )
     }

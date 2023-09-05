@@ -5,4 +5,5 @@ import com.verome.core.domain.emotions.Emotion
 interface EmotionsRepository {
     suspend fun getEmotions(): List<Emotion>
     suspend fun insertEmotion(emotion: Emotion)
+    suspend fun getEmotionById(emotionId: Long): Emotion
 }

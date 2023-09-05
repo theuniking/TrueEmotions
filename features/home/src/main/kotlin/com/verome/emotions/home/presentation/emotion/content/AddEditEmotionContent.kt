@@ -26,6 +26,8 @@ import com.verome.core.ui.widgets.input.CommonInputField
 import com.verome.emotions.home.presentation.emotion.EmotionController
 import com.verome.emotions.home.presentation.emotion.EmotionUiState
 import com.verome.emotions.home.presentation.emotion.content.common.EmotionPreviewExt
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 @Composable
 internal fun NewEmotionContent(uiState: EmotionUiState.Data, controller: EmotionController) {
@@ -64,13 +66,13 @@ internal fun NewEmotionContent(uiState: EmotionUiState.Data, controller: Emotion
         )
         Spacer(modifier = Modifier.height((20 * 1.2).dp))
         Text(
-            text = "Action",
+            text = "Tags",
             style = MaterialTheme.typography.h4.fontText(),
         )
         Spacer(modifier = Modifier.height((8 * 1.2).dp))
         CommonInputField(
-            text = uiState.action,
-            onValueChange = controller::onActionFieldChange,
+            text = uiState.tags,
+            onValueChange = controller::onTagsFieldChange,
             placeholderText = "place, event, etc",
         )
         Spacer(modifier = Modifier.height((24 * 1.2).dp))
@@ -82,13 +84,18 @@ internal fun NewEmotionContent(uiState: EmotionUiState.Data, controller: Emotion
                 style = MaterialTheme.typography.h4.fontText(),
             )
             Spacer(modifier = Modifier.weight(1f))
-            DateTag(text = uiState.date, onClick = controller::onDateChangeClick)
+            DateTag(
+                text = DateTimeFormatter.ofPattern("d MMM. uuuu", Locale.ENGLISH)
+                    .format(uiState.date),
+                onClick = controller::onDateChangeClick,
+            )
         }
         Spacer(modifier = Modifier.height((17 * 1.2).dp))
         DefaultButton(
             paddingValuesOutside = PaddingValues(horizontal = (34 * 1.2).dp),
             text = "Continue",
             onClick = controller::onContinueButtonClick,
+            enabled = uiState.action.isNotBlank(),
         )
         Spacer(modifier = Modifier.height((28 * 1.2).dp))
     }

@@ -19,7 +19,6 @@ internal class DefaultEmotionsRepository(
     override suspend fun getEmotions(): List<Emotion> {
         val userId = preferenceManager.getLong(PreferenceConstants.KEY_USER_ID)
         if (userId == 0L) return emptyList()
-        dao.getEmotionsOfUser(userId.toString())
         return dao.getEmotionsOfUser(userId.toString()).emotions.map { it.toEmotion() }
     }
 
@@ -35,5 +34,9 @@ internal class DefaultEmotionsRepository(
                 ),
             )
         }
+    }
+
+    override suspend fun getEmotionById(emotionId: Long): Emotion {
+        return dao.getEmotionById(emotionId).toEmotion()
     }
 }
