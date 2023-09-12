@@ -3,9 +3,11 @@ package com.verome.emotions.home.presentation.emotion.content.common
 import com.verome.core.domain.emotions.EmotionColor
 import com.verome.core.ui.widgets.dialog.DialogControl
 import com.verome.core.ui.widgets.dialog.picker.date.DatePickerDialogData
+import com.verome.core.ui.widgets.dialog.picker.time.TimePickerDialogData
 import com.verome.emotions.home.presentation.emotion.EmotionController
 import com.verome.emotions.home.presentation.emotion.EmotionUiState
-import java.time.LocalDateTime
+import java.time.LocalDate
+import java.time.LocalTime
 
 internal object EmotionPreviewExt {
     val uiState: EmotionUiState.Data = EmotionUiState.Data(
@@ -15,7 +17,8 @@ internal object EmotionPreviewExt {
         emotions = emptyList(),
         currentScreen = EmotionScreens.AddEditEmotion(),
         emotionColor = EmotionColor.Joy,
-        date = LocalDateTime.now(),
+        date = LocalDate.now(),
+        time = LocalTime.now(),
     )
 
     class FakeEmotionController : EmotionController {
@@ -30,5 +33,6 @@ internal object EmotionPreviewExt {
         override fun onEmotionTagClick(index: Int) = Unit
         override fun onDoneButtonClick() = Unit
         override val datePickerControl = DialogControl<DatePickerDialogData, Long>()
+        override val timePickerControl = DialogControl<TimePickerDialogData, TimePickerDialogData>()
     }
 }

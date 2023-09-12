@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.verome.core.ui.extension.defaultShadow
@@ -118,7 +119,8 @@ private fun DateTag(
             modifier = Modifier
                 .clip(MaterialTheme.shapes.medium)
                 .clickable(onClick = onClick)
-                .padding(horizontal = (10 * 1.2).dp, vertical = (8 * 1.2).dp),
+                .padding(horizontal = (10 * 1.2).dp, vertical = (5 * 1.2).dp),
+            fontWeight = FontWeight.Bold,
         )
     }
 }

@@ -16,6 +16,7 @@ import com.verome.core.ui.navigation.NavigateBackEvent
 import com.verome.core.ui.utils.getMillis
 import com.verome.core.ui.widgets.dialog.DialogControl
 import com.verome.core.ui.widgets.dialog.picker.date.DatePickerDialogData
+import com.verome.core.ui.widgets.dialog.picker.time.TimePickerDialogData
 import com.verome.emotions.home.domain.repository.EmotionsRepository
 import com.verome.emotions.home.presentation.emotion.content.common.EmotionScreens
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -26,12 +27,15 @@ import kotlinx.coroutines.flow.update
 import java.time.Instant
 import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.LocalTime
 import java.time.ZoneId
 import javax.inject.Inject
 
 private const val NEW_EMOTION_NAME = "New Emotion"
 private const val MAX_ACTION_CHARS = 100
 private const val MAX_TAGS_MINUS_ONE = 4
+private const val DEFAULT_HOUR = 12
+private const val DEFAULT_MINUTE = 0
 private const val ONE_DAY = 1L
 private const val TAGS_SPLIT_BY = ","
 private const val EMPTY_SPACE = " "
@@ -49,6 +53,7 @@ class EmotionViewModel @Inject constructor(
     internal val uiState: StateFlow<EmotionUiState> = _uiState.asStateFlow()
     private val date: MutableStateFlow<Long> = MutableStateFlow(LocalDate.now().getMillis())
     override val datePickerControl = DialogControl<DatePickerDialogData, Long>()
+    override val timePickerControl = DialogControl<TimePickerDialogData, TimePickerDialogData>()
 
     init {
         initData()
@@ -148,7 +153,7 @@ class EmotionViewModel @Inject constructor(
                                 date = LocalDateTime.ofInstant(
                                     Instant.ofEpochMilli(date.value),
                                     ZoneId.systemDefault(),
-                                ),
+                                ).toLocalDate(),
                             )
                         }
                     }
@@ -158,7 +163,27 @@ class EmotionViewModel @Inject constructor(
     }
 
     override fun onTimeChangeClick() {
-        // todo: implement time change
+        dataRequest(
+            request = {
+                timePickerControl.showForResult(
+                    data = TimePickerDialogData(
+                        selectedHour = getUiStateData()?.time?.hour ?: DEFAULT_HOUR,
+                        selectedMinute = getUiStateData()?.time?.minute ?: DEFAULT_MINUTE,
+                    ),
+                )
+            },
+            onSuccess = { selectedDate ->
+                selectedDate?.let {
+                    getUiStateData()?.let { data ->
+                        _uiState.tryToUpdate {
+                            data.copy(
+                                time = LocalTime.MIDNIGHT,
+                            )
+                        }
+                    }
+                }
+            },
+        )
     }
 
     override fun onEmotionClick(emotionColor: EmotionColor) {
@@ -248,18 +273,20 @@ class EmotionViewModel @Inject constructor(
                         action = data.action,
                         whatHappened = data.whatHappened,
                         tags = data.tags.joinToString(TAGS_SPLIT_BY + EMPTY_SPACE),
-                        date = data.date,
+                        date = data.date.toLocalDate(),
+                        time = data.date.toLocalTime(),
                         emotions = data.emotions,
                         emotionColor = data.emotionColor,
                     )
                 } ?: EmotionUiState.Data(
                     action = String.empty,
                     whatHappened = String.empty,
-                    date = LocalDateTime.now(),
+                    date = LocalDate.now(),
+                    time = LocalTime.now(),
                     emotions = emptyList(),
                     tags = String.empty,
                     chosenEmotions = emptyList(),
-                    emotionColor = EmotionColor(name = String.empty, color = 0),
+                    emotionColor = EmotionColor(name = String.empty, color = 0, trackerImpact = 0f),
                 )
             },
         )
