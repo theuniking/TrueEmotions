@@ -30,7 +30,6 @@ import com.verome.core.ui.widgets.chart.rememberMarker
 import com.verome.core.ui.widgets.selector.MultiSelector
 import com.verome.core.ui.widgets.toolbar.BottomSheetToolbar
 import com.verome.emotions.home.presentation.tracker.range.TrackerRange
-import java.time.ZoneOffset
 
 @Composable
 internal fun TrackerContent(
@@ -54,9 +53,9 @@ internal fun TrackerContent(
                 Chart(
                     chart = lineChart(
                         persistentMarkers = remember(uiState.trackerValues) {
-                            uiState.trackerValues.keys.map { localDateTime ->
-                                localDateTime.toEpochSecond(ZoneOffset.UTC).toFloat() to marker
-                            }.toMap()
+                            uiState.trackerValues.keys.associate { localDateTime ->
+                                localDateTime.toLocalDate().toEpochDay().toFloat() to marker
+                            }
                         },
                     ),
                     model = entryModelOf(
