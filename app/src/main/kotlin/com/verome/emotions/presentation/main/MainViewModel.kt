@@ -3,9 +3,9 @@ package com.verome.emotions.presentation.main
 import androidx.lifecycle.viewModelScope
 import com.verome.core.data.local.preferences.PreferenceConstants
 import com.verome.core.data.local.preferences.PreferenceManager
+import com.verome.core.domain.isNull
 import com.verome.core.domain.message.Message
 import com.verome.core.domain.message.MessageHandler
-import com.verome.core.domain.model.User.Companion.NULL_USER_ID
 import com.verome.core.ui.base.BaseViewModel
 import com.verome.core.ui.extension.tryToUpdate
 import com.verome.core.ui.widgets.dialog.DialogControl
@@ -52,7 +52,7 @@ internal class MainViewModel @Inject constructor(
     private fun authUser() {
         dataRequest(
             request = {
-                preferenceManager.getLong(PreferenceConstants.KEY_USER_ID) != NULL_USER_ID
+                !preferenceManager.getLong(PreferenceConstants.KEY_USER_ID).isNull()
             },
             onSuccess = { isSignedIn ->
                 _uiState.tryToUpdate {

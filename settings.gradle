@@ -38,6 +38,7 @@ dependencyResolutionManagement {
             version("androidxHilt", "1.0.0")
             version("detekt", "1.23.1")
             version("chucker", "4.0.0")
+            version("vico", "1.11.3")
 
             plugin("android-application", "com.android.application").versionRef("androidGradlePlugin")
             plugin("android-library", "com.android.library").versionRef("androidGradlePlugin")
@@ -63,6 +64,9 @@ dependencyResolutionManagement {
             library("accompanistNavigation", "com.google.accompanist", "accompanist-navigation-material").versionRef("accompanistNavigation")
 
             library("androidMaterial", "com.google.android.material", "material").version("1.9.0")
+
+            library("graphCompose", "com.patrykandpatrick.vico", "compose").versionRef("vico")
+            library("graphCore", "com.patrykandpatrick.vico", "core").versionRef("vico")
 
             library("coil", "io.coil-kt", "coil").versionRef("coil")
             library("coilGif", "io.coil-kt", "coil-gif").versionRef("coil")
@@ -105,6 +109,7 @@ dependencyResolutionManagement {
 
             bundle("androidx", ["coreKtx", "appCompat", "activityCompose"])
             bundle("coil", ["coil", "coilCompose", "coilGif"])
+            bundle("graph", ["graphCore", "graphCompose"])
             bundle("navigation", ["hiltNavigationCompose", "navigationComponent", "accompanistNavigation"])
             bundle("compose", ["material", "compose_foundation", "compose_ui", "ui-tooling-preview"])
             bundle("serialization", ["koltinxSerialization", "koitlinxJsonSerial"])

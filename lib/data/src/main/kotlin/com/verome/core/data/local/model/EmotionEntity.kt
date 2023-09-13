@@ -12,6 +12,7 @@ data class EmotionEntity(
     val tags: List<String>,
     val emotions: List<String>,
     val color: Int,
+    val trackerImpact: Float,
     val userId: Long,
     @PrimaryKey val id: Long? = null,
 )

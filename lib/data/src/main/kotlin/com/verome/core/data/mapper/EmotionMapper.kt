@@ -13,7 +13,7 @@ fun EmotionEntity.toEmotion(): Emotion {
         date = date,
         tags = tags,
         emotions = emotions,
-        emotionColor = EmotionColor(String.empty, color = color),
+        emotionColor = EmotionColor(String.empty, color = color, trackerImpact),
     )
 }
 
@@ -26,6 +26,7 @@ fun Emotion.toEmotionEntity(userId: Long): EmotionEntity {
         tags = tags,
         emotions = emotions,
         color = emotionColor.color,
+        trackerImpact = emotionColor.trackerImpact,
         userId = userId,
     )
 }

@@ -4,6 +4,7 @@ import androidx.compose.runtime.Stable
 import com.verome.core.domain.emotions.EmotionColor
 import com.verome.core.ui.widgets.dialog.DialogControl
 import com.verome.core.ui.widgets.dialog.picker.date.DatePickerDialogData
+import com.verome.core.ui.widgets.dialog.picker.time.TimePickerDialogData
 
 @Stable
 internal interface EmotionController {
@@ -18,4 +19,5 @@ internal interface EmotionController {
     fun onEmotionTagClick(index: Int)
     fun onDoneButtonClick()
     val datePickerControl: DialogControl<DatePickerDialogData, Long>
+    val timePickerControl: DialogControl<TimePickerDialogData, TimePickerDialogData>
 }

@@ -3,7 +3,8 @@ package com.verome.emotions.home.presentation.emotion
 import androidx.compose.runtime.Stable
 import com.verome.core.domain.emotions.EmotionColor
 import com.verome.emotions.home.presentation.emotion.content.common.EmotionScreens
-import java.time.LocalDateTime
+import java.time.LocalDate
+import java.time.LocalTime
 
 @Stable
 internal sealed interface EmotionUiState {
@@ -15,7 +16,8 @@ internal sealed interface EmotionUiState {
         val action: String,
         val whatHappened: String,
         val tags: String,
-        val date: LocalDateTime,
+        val date: LocalDate,
+        val time: LocalTime,
         val emotions: List<String>,
         val emotionColor: EmotionColor,
         val chosenEmotions: List<Int> = emptyList(),

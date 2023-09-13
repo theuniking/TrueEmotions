@@ -14,10 +14,11 @@ val Grey50 = Color(0xFF8A8A8A)
 val Grey60 = Color(0xFFACAEB3)
 val Grey70 = Color(0xFFBFBFBF)
 val Grey90 = Color(0xFFECF1FD)
-val Indigo30 = Color(0xFF5445F9)
-val Indigo50 = Color(0xFF7157FC)
-val Indigo70 = Color(0xFF8F68FF)
+val IndigoGrey = Color(0xFFD8D1FF)
 val Indigo90 = Color(0xFFAFB7FF)
+val Indigo70 = Color(0xFF8F68FF)
+val Indigo50 = Color(0xFF7157FC)
+val Indigo30 = Color(0xFF5445F9)
 val Blue80 = Color(0xFF83AFFF)
 val Red70 = Color(0xFFD97C7C)
 val Green70 = Color(0xFF8DE4A5)
@@ -40,6 +41,7 @@ data class AdditionalColors(
     val btnText: Color,
     val btnDisabledGradientFirst: Color,
     val btnDisabledGradientSecond: Color,
+    val selectorBackground: Color,
     val actionCard1: Color,
 )
 
@@ -61,6 +63,7 @@ val additionalLightColors = AdditionalColors(
     btnText = Indigo50,
     btnDisabledGradientFirst = Grey70,
     btnDisabledGradientSecond = Grey30,
+    selectorBackground = IndigoGrey,
     actionCard1 = Indigo90,
 )
 

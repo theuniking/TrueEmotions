@@ -45,6 +45,7 @@ dependencies {
     implementation libs.bundles.coroutine
     implementation libs.bundles.androidx
     implementation libs.bundles.compose
+    implementation libs.bundles.graph
     implementation libs.hiltAndroid
     implementation libs.roomRuntime
     implementation libs.roomKtx
