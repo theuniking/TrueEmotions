@@ -173,13 +173,14 @@ class EmotionViewModel @Inject constructor(
                 )
             },
             onSuccess = { selectedDate ->
-                selectedDate?.let {
-                    getUiStateData()?.let { data ->
-                        _uiState.tryToUpdate {
-                            data.copy(
-                                time = LocalTime.MIDNIGHT,
-                            )
-                        }
+                getUiStateData()?.let { data ->
+                    _uiState.tryToUpdate {
+                        data.copy(
+                            time = LocalTime.of(
+                                selectedDate?.selectedHour ?: DEFAULT_HOUR,
+                                selectedDate?.selectedMinute ?: DEFAULT_MINUTE,
+                            ),
+                        )
                     }
                 }
             },
@@ -240,9 +241,9 @@ class EmotionViewModel @Inject constructor(
                             emotionColor = data.emotionColor,
                             tags = data.tags.split(TAGS_SPLIT_BY).map { it.trim() }
                                 .filter { it.isNotEmpty() },
-                            date = LocalDateTime.ofInstant(
-                                Instant.ofEpochMilli(date.value),
-                                ZoneId.systemDefault(),
+                            date = LocalDateTime.of(
+                                data.date,
+                                data.time,
                             ),
                         ),
                     )

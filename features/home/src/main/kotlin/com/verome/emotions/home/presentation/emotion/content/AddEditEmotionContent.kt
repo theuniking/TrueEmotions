@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -23,6 +24,7 @@ import com.verome.core.ui.theme.additionalColors
 import com.verome.core.ui.theme.fontText
 import com.verome.core.ui.widgets.button.DefaultButton
 import com.verome.core.ui.widgets.dialog.picker.date.ShowDatePickerDialog
+import com.verome.core.ui.widgets.dialog.picker.time.ShowTimePickerDialog
 import com.verome.core.ui.widgets.input.CommonInputField
 import com.verome.emotions.home.presentation.emotion.EmotionController
 import com.verome.emotions.home.presentation.emotion.EmotionUiState
@@ -90,6 +92,12 @@ internal fun NewEmotionContent(uiState: EmotionUiState.Data, controller: Emotion
                     .format(uiState.date),
                 onClick = controller::onDateChangeClick,
             )
+            Spacer(modifier = Modifier.width((5 * 1.2).dp))
+            DateTag(
+                text = DateTimeFormatter.ofPattern("HH:mm")
+                    .format(uiState.time),
+                onClick = controller::onTimeChangeClick,
+            )
         }
         Spacer(modifier = Modifier.height((17 * 1.2).dp))
         DefaultButton(
@@ -102,6 +110,7 @@ internal fun NewEmotionContent(uiState: EmotionUiState.Data, controller: Emotion
     }
 
     ShowDatePickerDialog(dialogControl = controller.datePickerControl)
+    ShowTimePickerDialog(dialogControl = controller.timePickerControl)
 }
 
 @Composable
